@@ -33,7 +33,7 @@ export function Hero() {
     return (
         <section
             ref={rootRef}
-            className="min-h-screen flex flex-col justify-center"
+            className="min-h-screen flex flex-col justify-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20"
         >
             <p className="hero-eyebrow text-[var(--text-m)] leading-[var(--leading-sm)] text-[var(--color-accent-500)] font-medium tracking-wide uppercase mb-4">
                 I&apos;m
