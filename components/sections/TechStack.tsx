@@ -1,0 +1,216 @@
+"use client";
+
+import { useEffect, useRef, useState, useCallback } from "react";
+import StackIcon, { type IconName } from "tech-stack-icons";
+
+interface TechItem {
+  name: string;
+  iconName: IconName;
+}
+
+export function TechStack() {
+  const row1Tech: TechItem[] = [
+    { name: "GSAP", iconName: "gsap" },
+    { name: "JAVASCRIPT", iconName: "js" },
+    { name: "TYPESCRIPT", iconName: "typescript" },
+    { name: "TAILWIND", iconName: "tailwindcss" },
+        { name: "MOTION", iconName: "motion" },
+    { name: "REACT", iconName: "react" },
+
+  ];
+
+  const row2Tech: TechItem[] = [
+    { name: "DJANGO", iconName: "django" },
+    { name: "NEXT.JS", iconName: "nextjs2" },
+    { name: "POSTGRESQL", iconName: "postgresql" },
+    { name: "PYTHON", iconName: "python" },
+    { name: "NODE.JS", iconName: "nodejs" },
+    { name: "SUPABASE", iconName: "supabase" },
+  ];
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const singleSetRef = useRef<HTMLDivElement>(null);
+
+  // Dragging and animation state
+  const isDraggingRef = useRef(false);
+  const startXRef = useRef(0);
+  const currentXRef = useRef(0);
+  const lastPointerXRef = useRef(0);
+  const velocityRef = useRef(0);
+  const setWidthRef = useRef(0);
+  const animFrameIdRef = useRef<number | null>(null);
+  const [isGrabbing, setIsGrabbing] = useState(false);
+
+  // Smooth auto-scroll speed (pixels per frame at ~60fps)
+  const AUTO_SPEED = 0.6;
+
+  const updateDimensions = useCallback(() => {
+    if (singleSetRef.current) {
+      const width = singleSetRef.current.offsetWidth;
+      if (width > 0) {
+        setWidthRef.current = width;
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    updateDimensions();
+
+    const handleResize = () => {
+      updateDimensions();
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    const loop = () => {
+      const setWidth = setWidthRef.current;
+
+      if (setWidth > 0) {
+        if (!isDraggingRef.current) {
+          // Smoothly decay momentum towards default auto-drift speed
+          velocityRef.current += (AUTO_SPEED - velocityRef.current) * 0.04;
+          currentXRef.current += velocityRef.current;
+        }
+
+        // Modulo wrapping for infinite continuous looping
+        currentXRef.current =
+          ((currentXRef.current % setWidth) + setWidth) % setWidth;
+
+        if (trackRef.current) {
+          trackRef.current.style.transform = `translate3d(-${currentXRef.current}px, 0, 0)`;
+        }
+      }
+
+      animFrameIdRef.current = requestAnimationFrame(loop);
+    };
+
+    animFrameIdRef.current = requestAnimationFrame(loop);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      if (animFrameIdRef.current) {
+        cancelAnimationFrame(animFrameIdRef.current);
+      }
+    };
+  }, [updateDimensions]);
+
+  const handlePointerDown = (e: React.PointerEvent) => {
+    if (e.button !== 0 && e.pointerType === "mouse") return;
+
+    isDraggingRef.current = true;
+    setIsGrabbing(true);
+    startXRef.current = e.clientX;
+    lastPointerXRef.current = e.clientX;
+    velocityRef.current = 0;
+
+    if (containerRef.current) {
+      containerRef.current.setPointerCapture(e.pointerId);
+    }
+  };
+
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (!isDraggingRef.current) return;
+
+    const deltaX = e.clientX - lastPointerXRef.current;
+    lastPointerXRef.current = e.clientX;
+
+    currentXRef.current -= deltaX;
+    velocityRef.current = -deltaX;
+  };
+
+  const handlePointerUp = (e: React.PointerEvent) => {
+    if (!isDraggingRef.current) return;
+
+    isDraggingRef.current = false;
+    setIsGrabbing(false);
+
+    if (containerRef.current && containerRef.current.hasPointerCapture(e.pointerId)) {
+      containerRef.current.releasePointerCapture(e.pointerId);
+    }
+  };
+
+  const renderTwoRowsSet = (ref?: React.RefObject<HTMLDivElement | null>) => (
+    <div
+      ref={ref}
+      className="flex flex-col shrink-0 select-none"
+    >
+      {/* Row 1 */}
+      <div className="flex border-b border-black/15">
+        {row1Tech.map((item, idx) => (
+          <div
+            key={`r1-${idx}`}
+            className="group flex items-center justify-center gap-3 w-44 sm:w-52 md:w-60 h-16 sm:h-20 md:h-24 bg-[#f2f2f2] hover:bg-[#eaeaea] transition-colors duration-200 shrink-0 select-none cursor-grab active:cursor-grabbing border-r border-black/15"
+          >
+            <div className="w-5 h-5 sm:w-6 sm:h-6 shrink-0 flex items-center justify-center filter grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
+              <StackIcon name={item.iconName} className="w-full h-full object-contain" />
+            </div>
+            <span className="font-mono text-xs sm:text-sm tracking-wider uppercase text-black/75 group-hover:text-black font-medium transition-colors whitespace-nowrap">
+              {item.name}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      {/* Row 2 */}
+      <div className="flex">
+        {row2Tech.map((item, idx) => (
+          <div
+            key={`r2-${idx}`}
+            className="group flex items-center justify-center gap-3 w-44 sm:w-52 md:w-60 h-16 sm:h-20 md:h-24 bg-[#f2f2f2] hover:bg-[#eaeaea] transition-colors duration-200 shrink-0 select-none cursor-grab active:cursor-grabbing border-r border-black/15"
+          >
+            <div className="w-5 h-5 sm:w-6 sm:h-6 shrink-0 flex items-center justify-center filter grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
+              <StackIcon name={item.iconName} className="w-full h-full object-contain" />
+            </div>
+            <span className="font-mono text-xs sm:text-sm tracking-wider uppercase text-black/75 group-hover:text-black font-medium transition-colors whitespace-nowrap">
+              {item.name}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
+  return (
+    <section
+      id="stack"
+      aria-label="My Stack"
+      className="relative w-full py-10 sm:py-14 md:py-16 lg:py-20 select-none overflow-hidden"
+    >
+      {/* Edge feathering */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-0 top-0 bottom-0 w-10 sm:w-20 md:w-32 bg-gradient-to-r from-[#f2f2f2] via-[#f2f2f2]/80 to-transparent z-10"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute right-0 top-0 bottom-0 w-10 sm:w-20 md:w-32 bg-gradient-to-l from-[#f2f2f2] via-[#f2f2f2]/80 to-transparent z-10"
+      />
+
+      {/* Infinite + Free Drag Container */}
+      <div
+        ref={containerRef}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerUp}
+        className={`w-full overflow-hidden flex items-center border-y border-black/15 ${
+          isGrabbing ? "cursor-grabbing" : "cursor-grab"
+        }`}
+      >
+        <div
+          ref={trackRef}
+          className="flex will-change-transform"
+          style={{ transform: "translate3d(0px, 0, 0)" }}
+        >
+          {/* Reference set for width calculation */}
+          {renderTwoRowsSet(singleSetRef)}
+          {/* Seamless loop sets */}
+          {renderTwoRowsSet()}
+          {renderTwoRowsSet()}
+          {renderTwoRowsSet()}
+        </div>
+      </div>
+    </section>
+  );
+}

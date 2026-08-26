@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -163,27 +162,17 @@ export function Hero() {
             id="hero"
             ref={rootRef}
             aria-label="Introduction"
-            className="relative isolate min-h-screen grid grid-rows-[1fr_auto_1fr] items-stretch text-center overflow-x-clip"
+            className="relative isolate min-h-[calc(100dvh-200px)] grid grid-rows-[1fr_auto_1fr] items-stretch text-center overflow-x-clip"
         >
-            {/* 1st Row: Image at the bottom center of Row 1 */}
-            <div className="relative z-10 flex items-end justify-center pb-1 sm:pb-2">
-                <div className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full border-2 border-black overflow-hidden shrink-0 bg-[#c9c9c9]">
-                    <Image
-                        src="/hero-portrait.webp"
-                        alt="Jericho Urbano"
-                        fill
-                        className="object-cover object-top"
-                        priority
-                    />
-                </div>
-            </div>
+            {/* 1st Row: Spacing placeholder to keep middle text centered */}
+            <div className="relative z-10" />
 
             {/* 2nd Row: Text dead center on the screen */}
             <div className="relative z-10 flex flex-col items-center justify-center gap-1 sm:gap-2 md:gap-3 w-full py-0">
                 {/* Line 1: I'M JERICHO URBANO, */}
                 <h1
                     ref={line1Ref}
-                    className="hero-line font-pixel-circle text-xl sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl text-ink-300 tracking-wider uppercase select-none will-change-transform whitespace-nowrap leading-[1.15] text-center"
+                    className="hero-line font-pixel-circle text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-ink-300 tracking-wider uppercase select-none will-change-transform whitespace-nowrap leading-[1.15] text-center"
                 >
                     I&apos;M JERICHO URBANO,
                 </h1>
@@ -191,7 +180,7 @@ export function Hero() {
                 {/* Line 2: A WEBFLOW DEVELOPER / DESIGNER */}
                 <div
                     ref={line2Ref}
-                    className="hero-line flex flex-wrap items-center justify-center gap-x-2 sm:gap-x-3 md:gap-x-4 font-pixel-circle text-xl sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl text-ink-300 tracking-wider uppercase select-none will-change-transform leading-[1.15] text-center"
+                    className="hero-line flex flex-wrap items-center justify-center gap-x-2 sm:gap-x-3 md:gap-x-4 font-pixel-circle text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-ink-300 tracking-wider uppercase select-none will-change-transform leading-[1.15] text-center"
                 >
                     <span className="whitespace-nowrap">A WEBFLOW</span>
                     <span
@@ -235,30 +224,37 @@ export function Hero() {
                 {/* Line 3: BASED IN PHILIPPINES. */}
                 <p
                     ref={line3Ref}
-                    className="hero-line font-pixel-circle text-xl sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl text-ink-300 tracking-wider uppercase select-none will-change-transform whitespace-nowrap leading-[1.15] text-center"
+                    className="hero-line font-pixel-circle text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-ink-300 tracking-wider uppercase select-none will-change-transform whitespace-nowrap leading-[1.15] text-center"
                 >
                     BASED IN PHILIPPINES.
                 </p>
             </div>
 
-            {/* 3rd Row: Left bottom description and Right bottom actions */}
+            {/* 3rd Row: Description and Actions at the top center of Row 3 */}
             <div
                 ref={bottomRowRef}
-                className="relative z-10 w-full flex flex-col md:flex-row md:items-end justify-between items-center text-center md:text-left gap-6 md:gap-10  pb-10 sm:pb-12 md:pb-14 will-change-transform"
+                className="relative z-10 w-full flex flex-col items-center justify-start gap-3 sm:gap-4 text-center will-change-transform"
             >
-                {/* Left Bottom */}
-                <p className="text-sm sm:text-base md:text-lg text-ink-500 max-w-xl leading-relaxed">
-                    Designing and Developing visuall stunning and technicall proficient website for clients.</p>
+                {/* Center Description */}
+                <p className="text-sm sm:text-base md:text-lg text-ink-500 max-w-3xl leading-relaxed text-center">
+                     Designing and Developing visuall stunning and technicall proficient website for clients.
+                </p>
 
-                {/* Right Bottom Actions */}
-                <div className="flex flex-wrap items-center justify-center md:justify-end gap-6 sm:gap-8 shrink-0 text-sm sm:text-base font-mono tracking-wider uppercase">
+                {/* Center Actions */}
+                <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 shrink-0 text-sm sm:text-base font-mono tracking-wider uppercase pt-3">
                     <a
                         href="/resume.pdf"
                         download
                         onMouseEnter={() => setIsHoveredCv(true)}
                         onMouseLeave={() => setIsHoveredCv(false)}
-                        className="group inline-flex items-center text-ink-300 hover:text-primary-500 transition-colors uppercase cursor-pointer select-none py-1"
+                        className="relative group inline-flex items-center justify-center px-6 py-2.5 sm:px-7 sm:py-3 bg-transparent rounded-none text-ink-300 hover:text-primary-500 transition-colors uppercase cursor-pointer select-none"
                     >
+                        {/* Extended crosshair borders forming plus corners */}
+                        <span aria-hidden="true" className="absolute -left-2 -right-2 top-0 border-t border-black pointer-events-none" />
+                        <span aria-hidden="true" className="absolute -left-2 -right-2 bottom-0 border-b border-black pointer-events-none" />
+                        <span aria-hidden="true" className="absolute -top-2 -bottom-2 left-0 border-l border-black pointer-events-none" />
+                        <span aria-hidden="true" className="absolute -top-2 -bottom-2 right-0 border-r border-black pointer-events-none" />
+
                         <AnimatedSplitText
                             text="DOWNLOAD CV"
                             isHovered={isHoveredCv}
@@ -275,8 +271,14 @@ export function Hero() {
                         }}
                         onMouseEnter={() => setIsHoveredTalk(true)}
                         onMouseLeave={() => setIsHoveredTalk(false)}
-                        className="group inline-flex items-center gap-1.5 text-ink-300 hover:text-primary-500 transition-colors uppercase cursor-pointer select-none py-1"
+                        className="relative group inline-flex items-center justify-center gap-2 px-6 py-2.5 sm:px-7 sm:py-3 bg-transparent rounded-none text-ink-300 hover:text-primary-500 transition-colors uppercase cursor-pointer select-none"
                     >
+                        {/* Extended crosshair borders forming plus corners */}
+                        <span aria-hidden="true" className="absolute -left-2 -right-2 top-0 border-t border-black pointer-events-none" />
+                        <span aria-hidden="true" className="absolute -left-2 -right-2 bottom-0 border-b border-black pointer-events-none" />
+                        <span aria-hidden="true" className="absolute -top-2 -bottom-2 left-0 border-l border-black pointer-events-none" />
+                        <span aria-hidden="true" className="absolute -top-2 -bottom-2 right-0 border-r border-black pointer-events-none" />
+
                         <AnimatedSplitText
                             text="LETS TALK"
                             isHovered={isHoveredTalk}
