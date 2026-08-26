@@ -41,7 +41,7 @@ export function Navbar({ onNavigate }: NavbarProps) {
                         alt="Jericho Urbano Logo"
                         width={40}
                         height={40}
-                        className="h-10 w-auto object-contain transition-opacity hover:opacity-80"
+                        className="h-10 w-auto object-contain transition-opacity hover:opacity-80 invert-100"
                         priority
                     />
                 </Link>

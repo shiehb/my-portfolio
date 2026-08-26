@@ -17,21 +17,20 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: "Jericho Urbano | Software & Systems Engineer",
+    default: "Jericho Urbano | Webflow Developer / Designer",
     template: "%s | Jericho Urbano",
   },
   description:
-    "Portfolio of Jericho Urbano — building custom software, data integrations, and scalable cloud systems.",
+    "Portfolio of Jericho Urbano — Webflow Developer & Designer building bespoke digital experiences and scalable design systems.",
   keywords: [
     "Jericho Urbano",
-    "Software Engineer",
-    "Systems Engineer",
-    "Full Stack Developer",
+    "Webflow Developer",
+    "Webflow Designer",
+    "UI/UX Designer",
+    "Frontend Developer",
+    "Design Systems",
     "Next.js",
     "TypeScript",
-    "Python",
-    "Django",
-    "Cloud Architecture",
   ],
   authors: [{ name: "Jericho Urbano", url: BASE_URL }],
   creator: "Jericho Urbano",
@@ -39,9 +38,9 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Jericho Urbano | Software & Systems Engineer",
+    title: "Jericho Urbano | Webflow Developer / Designer",
     description:
-      "Building custom software, data integrations, and scalable cloud systems.",
+      "Webflow Developer & Designer building bespoke digital experiences and scalable design systems.",
     url: BASE_URL,
     siteName: "Jericho Urbano Portfolio",
     images: [
@@ -57,9 +56,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Jericho Urbano | Software & Systems Engineer",
+    title: "Jericho Urbano | Webflow Developer / Designer",
     description:
-      "Building custom software, data integrations, and scalable cloud systems.",
+      "Webflow Developer & Designer building bespoke digital experiences and scalable design systems.",
     images: ["/logo.webp"],
   },
   robots: {
@@ -84,7 +83,7 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Jericho Urbano",
-    jobTitle: "Software & Systems Engineer",
+    jobTitle: "Webflow Developer / Designer",
     url: BASE_URL,
     image: `${BASE_URL}/logo.webp`,
     sameAs: [
@@ -93,7 +92,7 @@ export default function RootLayout({
       "https://instagram.com/jerichourbano",
     ],
     description:
-      "Software & systems engineer specializing in custom software, integrations, and cloud infrastructure.",
+      "Webflow developer & designer specializing in custom web experiences, interactive designs, and modern frontend systems.",
   };
 
   return (

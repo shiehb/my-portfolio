@@ -22,18 +22,81 @@ export const NAV_LINKS = [
 ];
 
 export const SOCIALS = [
-    { label: "GitHub", href: "https://github.com/jerichourbano" },
-    { label: "LinkedIn", href: "https://linkedin.com/in/jerichourbano" },
-    { label: "Instagram", href: "https://instagram.com/jerichourbano" },
+    { label: "GITHUB", href: "https://github.com/jerichourbano" },
+    { label: "LINKEDIN", href: "https://linkedin.com/in/jerichourbano" },
+    { label: "INSTAGRAM", href: "https://instagram.com/jerichourbano" },
+    
 ];
 
 export const EMAIL = "jerichourbano.01.01.04@gmail.com";
+
+// Interactive split-character hover roll component (character-by-character staggered slide up)
+function AnimatedTextLink({
+    text,
+    className = "",
+    charClassName = "",
+    isHovered = false,
+    colorTop = "text-ink-300",
+    colorBottom = "text-primary-500",
+}: {
+    text: string;
+    className?: string;
+    charClassName?: string;
+    isHovered: boolean;
+    colorTop?: string;
+    colorBottom?: string;
+}) {
+    const chars = text.split("");
+
+    return (
+        <span className={`relative inline-flex overflow-hidden leading-none select-none ${className}`}>
+            {/* Primary Layer (slides up on hover) */}
+            <span
+                aria-hidden="true"
+                className={`inline-flex items-center leading-none ${colorTop}`}
+            >
+                {chars.map((char, index) => (
+                    <span
+                        key={`top-${index}`}
+                        className={`inline-block transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${charClassName}`}
+                        style={{
+                            transitionDelay: `${index * 30}ms`,
+                            transform: isHovered ? "translateY(-105%)" : "translateY(0%)",
+                        }}
+                    >
+                        {char === " " ? "\u00A0" : char}
+                    </span>
+                ))}
+            </span>
+
+            {/* Orange Replacement Layer (slides in from bottom on hover) */}
+            <span
+                aria-hidden="true"
+                className={`absolute inset-0 inline-flex items-center leading-none ${colorBottom}`}
+            >
+                {chars.map((char, index) => (
+                    <span
+                        key={`bot-${index}`}
+                        className={`inline-block transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${charClassName}`}
+                        style={{
+                            transitionDelay: `${index * 30}ms`,
+                            transform: isHovered ? "translateY(0%)" : "translateY(105%)",
+                        }}
+                    >
+                        {char === " " ? "\u00A0" : char}
+                    </span>
+                ))}
+            </span>
+        </span>
+    );
+}
 
 export function MenuOverlay({ isOpen, onClose, onNavigate }: MenuOverlayProps) {
     const pathname = usePathname();
     const { navigateTo } = usePageTransition();
     const [copied, setCopied] = useState(false);
     const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+    const [hoveredSocial, setHoveredSocial] = useState<string | null>(null);
 
     const overlayRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
@@ -190,17 +253,19 @@ export function MenuOverlay({ isOpen, onClose, onNavigate }: MenuOverlayProps) {
                                 onMouseLeave={() => setHoveredLink(null)}
                                 className="nav-stagger-item group flex items-baseline gap-4 md:gap-6 text-left cursor-pointer focus-visible:outline-none"
                             >
-                                <span className="font-pixel-circle text-primary-500 text-[clamp(1.25rem,2.5vw,2rem)] leading-none select-none tracking-widest shrink-0">
+                                <span className={`font-pixel-circle text-[clamp(1.25rem,2.5vw,2rem)] leading-none select-none tracking-widest shrink-0 transition-colors duration-300 ${
+                                    isHovered || isActive ? "text-primary-500" : "text-primary-500/70"
+                                }`}>
                                     {link.num}
                                 </span>
 
-                                <span
-                                    className={`font-pixel-circle text-[clamp(2.75rem,7vw,5.5rem)] leading-none tracking-wider transition-all duration-300 ease-out ${
-                                        isHovered || isActive ? "text-primary-500 translate-x-3" : "text-ink-300 translate-x-0"
-                                    }`}
-                                >
-                                    {link.label}
-                                </span>
+                                <AnimatedTextLink
+                                    text={link.label}
+                                    isHovered={isHovered || isActive}
+                                    className="font-pixel-circle text-[clamp(2.75rem,7vw,5.5rem)] tracking-wider"
+                                    colorTop={isActive ? "text-primary-500" : "text-ink-300"}
+                                    colorBottom="text-primary-500"
+                                />
                             </Link>
                         );
                     })}
@@ -241,19 +306,33 @@ export function MenuOverlay({ isOpen, onClose, onNavigate }: MenuOverlayProps) {
                             Social Profiles
                         </span>
                         <ul className="flex flex-col gap-3">
-                            {SOCIALS.map(({ label, href }) => (
-                                <li key={label}>
-                                    <a
-                                        href={href}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-2 text-base text-ink-300/80 hover:text-primary-500 transition-colors"
-                                    >
-                                        <span>{label}</span>
-                                        <ArrowUpRight className="w-4 h-4 opacity-60" />
-                                    </a>
-                                </li>
-                            ))}
+                            {SOCIALS.map(({ label, href }) => {
+                                const isHovered = hoveredSocial === label;
+
+                                return (
+                                    <li key={label}>
+                                        <a
+                                            href={href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            onMouseEnter={() => setHoveredSocial(label)}
+                                            onMouseLeave={() => setHoveredSocial(null)}
+                                            className="group inline-flex items-center gap-2 text-base text-ink-300/80 hover:text-primary-500 transition-colors py-0.5"
+                                        >
+                                            <AnimatedTextLink
+                                                text={label}
+                                                isHovered={isHovered}
+                                                className="font-mono text-base tracking-wide"
+                                                colorTop="text-ink-300/80"
+                                                colorBottom="text-primary-500"
+                                            />
+                                            <ArrowUpRight className={`w-4 h-4 transition-transform duration-300 ease-out ${
+                                                isHovered ? "text-primary-500 translate-x-0.5 -translate-y-0.5 opacity-100" : "opacity-60"
+                                            }`} />
+                                        </a>
+                                    </li>
+                                );
+                            })}
                         </ul>
                     </div>
                 </div>
