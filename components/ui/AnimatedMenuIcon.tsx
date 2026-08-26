@@ -30,13 +30,13 @@ export function AnimatedMenuIcon({ isOpen }: AnimatedMenuIconProps) {
       // Morph lines back to Hamburger
       gsap.to(topBarRef.current, {
         attr: { x1: 5, y1: 10, x2: 27, y2: 10 },
-        stroke: "#ffffff",
+        stroke: "#171717",
         duration: 0.35,
         ease: "power3.out",
       });
       gsap.to(bottomBarRef.current, {
         attr: { x1: 5, y1: 22, x2: 27, y2: 22 },
-        stroke: "#ffffff",
+        stroke: "#171717",
         duration: 0.35,
         ease: "power3.out",
       });
@@ -52,8 +52,8 @@ export function AnimatedMenuIcon({ isOpen }: AnimatedMenuIconProps) {
       strokeWidth="2.5"
       strokeLinecap="round"
     >
-      <line ref={topBarRef} x1="5" y1="10" x2="27" y2="10" stroke="#ffffff" />
-      <line ref={bottomBarRef} x1="5" y1="22" x2="27" y2="22" stroke="#ffffff" />
+      <line ref={topBarRef} x1="5" y1="10" x2="27" y2="10" stroke="#171717" />
+      <line ref={bottomBarRef} x1="5" y1="22" x2="27" y2="22" stroke="#171717" />
     </svg>
   );
 }

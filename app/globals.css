@@ -3,31 +3,31 @@
 /* ==========================================================================
    PORTFOLIO DESIGN SYSTEM TOKENS (app/globals.css)
    Tailwind CSS v4 CSS-First Configuration via @theme
-   Strict 5-Color System:
+   Strict Color System:
      1. #ff4d00 (Brand Accent Orange)
-     2. #0a0a0a (Base Canvas Dark)
-     3. #1a1a1a (Surface / Elevated Card)
-     4. #f0f0ed (Primary Bright Text)
-     5. #55554f (Muted Secondary Text)
+     2. #f2f2f2 (Base Canvas / Background)
+     3. #c9c9c9 (Surface / Elevated Card / Borders)
+     4. #171717 (Primary Text)
+     5. #3b3b3b (Muted Secondary Text)
    ========================================================================== */
 
 @theme {
-  /* ---- 5 Core Color Tokens ---- */
+  /* ---- Core Color Tokens ---- */
   --color-primary-500: #ff4d00;
   --color-primary-600: #d94000;
-  --color-paper-900: #0a0a0a;
-  --color-paper-500: #1a1a1a;
-  --color-paper-300: #1a1a1a;
-  --color-ink-50: #f0f0ed;
-  --color-ink-100: #f0f0ed;
-  --color-ink-300: #f0f0ed;
-  --color-ink-500: #55554f;
+  --color-paper-900: #f2f2f2;
+  --color-paper-500: #c9c9c9;
+  --color-paper-300: #c9c9c9;
+  --color-ink-50: #171717;
+  --color-ink-100: #171717;
+  --color-ink-300: #171717;
+  --color-ink-500: #3b3b3b;
 
   /* Direct semantic color utilities (bg-canvas, bg-surface, text-light, text-muted, text-accent) */
-  --color-canvas: #0a0a0a;
-  --color-surface: #1a1a1a;
-  --color-text-main: #f0f0ed;
-  --color-text-muted: #55554f;
+  --color-canvas: #f2f2f2;
+  --color-surface: #c9c9c9;
+  --color-text-main: #171717;
+  --color-text-muted: #3b3b3b;
   --color-accent: #ff4d00;
 
   /* ---- Radii ---- */
@@ -139,7 +139,7 @@ body {
 
 /* Surface container */
 .section-dark {
-  background-color: var(--color-paper-900);
+  background-color: transparent;
   color: var(--color-ink-300);
 }
 
@@ -174,7 +174,7 @@ body {
 
 .btn-primary {
   background-color: var(--color-primary-500);
-  color: #0a0a0a;
+  color: #ffffff;
   border-color: var(--color-primary-500);
   font-weight: 600;
 }
@@ -188,12 +188,12 @@ body {
 .btn-secondary {
   background-color: transparent;
   color: var(--color-ink-50);
-  border-color: rgba(240, 240, 237, 0.2);
+  border-color: rgba(23, 23, 23, 0.2);
 }
 
 .btn-secondary:hover:not(:disabled) {
   background-color: var(--color-paper-500);
-  border-color: rgba(240, 240, 237, 0.4);
+  border-color: rgba(23, 23, 23, 0.4);
 }
 
 .link {

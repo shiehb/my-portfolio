@@ -7,6 +7,7 @@ import { ArrowUpRight, Copy, Check } from "lucide-react";
 import gsap from "gsap";
 import { Magnetic } from "../ui/Magnetic";
 import { usePageTransition } from "../ui/PageTransition";
+import { AnimatedSplitText } from "../ui/AnimatedSplitText";
 
 export interface MenuOverlayProps {
     isOpen: boolean;
@@ -29,67 +30,6 @@ export const SOCIALS = [
 ];
 
 export const EMAIL = "jerichourbano.01.01.04@gmail.com";
-
-// Interactive split-character hover roll component (character-by-character staggered slide up)
-function AnimatedTextLink({
-    text,
-    className = "",
-    charClassName = "",
-    isHovered = false,
-    colorTop = "text-ink-300",
-    colorBottom = "text-primary-500",
-}: {
-    text: string;
-    className?: string;
-    charClassName?: string;
-    isHovered: boolean;
-    colorTop?: string;
-    colorBottom?: string;
-}) {
-    const chars = text.split("");
-
-    return (
-        <span className={`relative inline-flex overflow-hidden leading-none select-none ${className}`}>
-            {/* Primary Layer (slides up on hover) */}
-            <span
-                aria-hidden="true"
-                className={`inline-flex items-center leading-none ${colorTop}`}
-            >
-                {chars.map((char, index) => (
-                    <span
-                        key={`top-${index}`}
-                        className={`inline-block transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${charClassName}`}
-                        style={{
-                            transitionDelay: `${index * 30}ms`,
-                            transform: isHovered ? "translateY(-105%)" : "translateY(0%)",
-                        }}
-                    >
-                        {char === " " ? "\u00A0" : char}
-                    </span>
-                ))}
-            </span>
-
-            {/* Orange Replacement Layer (slides in from bottom on hover) */}
-            <span
-                aria-hidden="true"
-                className={`absolute inset-0 inline-flex items-center leading-none ${colorBottom}`}
-            >
-                {chars.map((char, index) => (
-                    <span
-                        key={`bot-${index}`}
-                        className={`inline-block transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${charClassName}`}
-                        style={{
-                            transitionDelay: `${index * 30}ms`,
-                            transform: isHovered ? "translateY(0%)" : "translateY(105%)",
-                        }}
-                    >
-                        {char === " " ? "\u00A0" : char}
-                    </span>
-                ))}
-            </span>
-        </span>
-    );
-}
 
 export function MenuOverlay({ isOpen, onClose, onNavigate }: MenuOverlayProps) {
     const pathname = usePathname();
@@ -223,7 +163,7 @@ export function MenuOverlay({ isOpen, onClose, onNavigate }: MenuOverlayProps) {
             >
                 <path
                     ref={pathRef}
-                    fill="#1a1a1a"
+                    fill="#c9c9c9"
                     d="M0 0 L1000 0 L1000 0 Q500 0 0 0 Z"
                 />
             </svg>
@@ -231,7 +171,7 @@ export function MenuOverlay({ isOpen, onClose, onNavigate }: MenuOverlayProps) {
             {/* Menu Content Container */}
             <div
                 ref={contentRef}
-                className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-24 w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20 items-center"
+                className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-24 w-full max-w-[1920px] mx-auto px-2 sm:px-4 md:px-8 lg:px-12 xl:px-16 2xl:px-20 items-center"
             >
                 {/* Primary Links */}
                 <nav aria-label="Main Navigation" className="flex flex-col gap-6 md:gap-8 items-start text-left">
@@ -259,7 +199,7 @@ export function MenuOverlay({ isOpen, onClose, onNavigate }: MenuOverlayProps) {
                                     {link.num}
                                 </span>
 
-                                <AnimatedTextLink
+                                <AnimatedSplitText
                                     text={link.label}
                                     isHovered={isHovered || isActive}
                                     className="font-pixel-circle text-[clamp(2.75rem,7vw,5.5rem)] tracking-wider"
@@ -272,7 +212,7 @@ export function MenuOverlay({ isOpen, onClose, onNavigate }: MenuOverlayProps) {
                 </nav>
 
                 {/* Contact Info & Socials */}
-                <div className="flex flex-col gap-8 items-start justify-center text-ink-100">
+                <div className="flex flex-col gap-8 items-start justify-center text-ink-300">
                     <div className="nav-stagger-item flex flex-col gap-2">
                         <span className="text-xs uppercase tracking-widest text-ink-500 font-mono">
                             Get In Touch
@@ -280,7 +220,7 @@ export function MenuOverlay({ isOpen, onClose, onNavigate }: MenuOverlayProps) {
                         <div className="flex items-center gap-3">
                             <a
                                 href={`mailto:${EMAIL}`}
-                                className="text-lg md:text-xl text-primary-500 hover:text-ink-50 font-medium transition-colors border-b border-primary-500/40 pb-0.5"
+                                className="text-lg md:text-xl text-primary-500 hover:text-ink-300 font-medium transition-colors border-b border-primary-500/40 pb-0.5"
                             >
                                 {EMAIL}
                             </a>
@@ -289,7 +229,7 @@ export function MenuOverlay({ isOpen, onClose, onNavigate }: MenuOverlayProps) {
                                     type="button"
                                     onClick={copyEmail}
                                     aria-label="Copy email address"
-                                    className="p-2 rounded-sm bg-white/10 hover:bg-white/20 text-ink-300 hover:text-white transition-colors cursor-pointer"
+                                    className="p-2 rounded-sm bg-[#f2f2f2] hover:bg-[#f2f2f2]/80 text-ink-300 transition-colors cursor-pointer"
                                 >
                                     {copied ? (
                                         <Check className="w-4 h-4 text-primary-500" />
@@ -319,7 +259,7 @@ export function MenuOverlay({ isOpen, onClose, onNavigate }: MenuOverlayProps) {
                                             onMouseLeave={() => setHoveredSocial(null)}
                                             className="group inline-flex items-center gap-2 text-base text-ink-300/80 hover:text-primary-500 transition-colors py-0.5"
                                         >
-                                            <AnimatedTextLink
+                                            <AnimatedSplitText
                                                 text={label}
                                                 isHovered={isHovered}
                                                 className="font-mono text-base tracking-wide"
@@ -327,7 +267,7 @@ export function MenuOverlay({ isOpen, onClose, onNavigate }: MenuOverlayProps) {
                                                 colorBottom="text-primary-500"
                                             />
                                             <ArrowUpRight className={`w-4 h-4 transition-transform duration-300 ease-out ${
-                                                isHovered ? "text-primary-500 translate-x-0.5 -translate-y-0.5 opacity-100" : "opacity-60"
+                                                isHovered ? "text-primary-500 translate-x-0.5 -translate-y-0.5 opacity-100" : "text-ink-300 opacity-60"
                                             }`} />
                                         </a>
                                     </li>

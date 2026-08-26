@@ -4,12 +4,13 @@ import { SmoothScroll } from "@/lib/SmoothScroll";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { PageTransitionProvider } from "@/components/ui/PageTransition";
+import DotLens from "@/components/ui/DotLens";
 import { geistMono, geistPixel } from "./fonts";
 
 const BASE_URL = "https://jerichourbano.com";
 
 export const viewport: Viewport = {
-  themeColor: "#000000",
+  themeColor: "#f2f2f2",
   width: "device-width",
   initialScale: 1,
 };
@@ -106,13 +107,32 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body>
-        <PageTransitionProvider>
-          <SmoothScroll />
-          <Navbar />
-          {children}
-          <Footer />
-        </PageTransitionProvider>
+      <body className="relative min-h-screen bg-[#f2f2f2] text-ink-50 selection:bg-primary-500 selection:text-white">
+        {/* Global DotLens Base Background */}
+        <div
+          className="fixed inset-0 pointer-events-none z-0 overflow-hidden"
+          aria-hidden="true"
+        >
+          <DotLens
+            background="#f2f2f2"
+            baseColor="#c9c9c9"
+            accentColor="#ff4d00"
+            density={80}
+            dotSize={20}
+            reach={20}
+            minSize={8}
+            speed={80}
+            hover={100}
+          />
+        </div>
+        <div className="relative z-10 w-full max-w-[1920px] mx-auto px-2 sm:px-4 md:px-8 lg:px-12 xl:px-16 2xl:px-20">
+          <PageTransitionProvider>
+            <SmoothScroll />
+            <Navbar />
+            {children}
+            <Footer />
+          </PageTransitionProvider>
+        </div>
       </body>
     </html>
   );

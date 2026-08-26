@@ -17,7 +17,7 @@ export function Footer() {
   return (
     <footer
       id="site-footer"
-      className="w-full min-h-dvh bg-transparent px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20 text-center flex flex-col items-center justify-center relative"
+      className="w-full min-h-dvh bg-transparent py-16 sm:py-24 text-center flex flex-col items-center justify-center relative"
     >
       <div className="max-w-7xl mx-auto flex flex-col items-center justify-center gap-3">
         <p className="font-pixel-circle text-ink-300 text-sm sm:text-base md:text-lg tracking-widest uppercase">
