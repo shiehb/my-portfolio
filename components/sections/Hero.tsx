@@ -38,7 +38,7 @@ export function Hero() {
             // Horizontal movement on scroll down (increased for dynamic parallax impact):
             if (line1Ref.current) {
                 gsap.to(line1Ref.current, {
-                    x: -120,
+                    x: -150,
                     ease: "none",
                     scrollTrigger: {
                         trigger: rootRef.current,
@@ -51,7 +51,7 @@ export function Hero() {
 
             if (line2Ref.current) {
                 gsap.to(line2Ref.current, {
-                    x: 120,
+                    x: 150,
                     ease: "none",
                     scrollTrigger: {
                         trigger: rootRef.current,
@@ -64,7 +64,7 @@ export function Hero() {
 
             if (line3Ref.current) {
                 gsap.to(line3Ref.current, {
-                    x: -120,
+                    x: -150,
                     ease: "none",
                     scrollTrigger: {
                         trigger: rootRef.current,
