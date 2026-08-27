@@ -100,6 +100,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${geistMono.variable} ${geistPixel.variable}`}
+      suppressHydrationWarning
     >
       <head>
         <script
@@ -107,7 +108,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="relative min-h-screen bg-[#f2f2f2] text-ink-50 selection:bg-primary-500 selection:text-white">
+      <body
+        className="relative min-h-screen bg-[#f2f2f2] text-ink-50 selection:bg-primary-500 selection:text-white"
+        suppressHydrationWarning
+      >
         {/* Global DotLens Base Background */}
         <div
           className="fixed inset-0 pointer-events-none z-0 overflow-hidden"
@@ -121,8 +125,8 @@ export default function RootLayout({
             dotSize={20}
             reach={20}
             minSize={8}
-            speed={80}
-            hover={100}
+            speed={60}
+            hover={20}
           />
         </div>
         <div className="relative z-10 w-full">

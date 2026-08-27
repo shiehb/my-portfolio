@@ -8,7 +8,7 @@ import { usePageTransition } from "../ui/PageTransition";
 import { ArrowUpRight } from "lucide-react";
 import { AnimatedSplitText } from "../ui/AnimatedSplitText";
 
-const ROLES = ["DEVELOPER", "DESIGNER"];
+const ROLES = ["Developer", "Designer"];
 
 export function Hero() {
     const rootRef = useRef<HTMLElement>(null);
@@ -167,35 +167,35 @@ export function Hero() {
             <div className="relative z-10" />
 
             {/* 2nd Row: Text dead center on the screen */}
-            <div className="relative z-10 flex flex-col items-center justify-center gap-1 sm:gap-2 md:gap-3 w-full py-0">
+            <div className="relative z-10 flex flex-col items-center justify-center w-full py-0">
                 {/* Line 1: I'M JERICHO URBANO, */}
                 <h1
                     ref={line1Ref}
-                    className="hero-line font-pixel-circle text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-ink-300 tracking-wider uppercase select-none will-change-transform whitespace-nowrap leading-[1.15] text-center"
+                    className="hero-line font-pixel-circle text-3xl sm:text-4xl lg:text-6xl text-ink-300 tracking-wider normal-case select-none will-change-transform whitespace-nowrap leading-[1.15] text-center"
                 >
-                    I&apos;M JERICHO URBANO,
+                    I&apos;m Jericho Urbano,
                 </h1>
 
                 {/* Line 2: A WEBFLOW DEVELOPER / DESIGNER */}
                 <div
                     ref={line2Ref}
-                    className="hero-line flex flex-wrap items-center justify-center gap-x-2 sm:gap-x-3 md:gap-x-4 font-pixel-circle text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-ink-300 tracking-wider uppercase select-none will-change-transform leading-[1.15] text-center"
+                    className="hero-line flex flex-wrap items-center justify-center gap-x-2 sm:gap-x-3 md:gap-x-4 font-pixel-circle text-3xl sm:text-4xl lg:text-6xl text-ink-300 tracking-wider normal-case select-none will-change-transform leading-[1.15] text-center"
                 >
-                    <span className="whitespace-nowrap">A WEBFLOW</span>
+                    <span className="whitespace-nowrap">a Webflow</span>
                     <span
                         aria-label="Developer and Designer"
-                        className="relative inline-flex items-center overflow-hidden h-[1.15em] min-w-[11ch] pr-2 text-primary-500 leading-none text-left"
+                        className="relative inline-flex items-center overflow-hidden h-[1.15em] min-w-[9ch] pr-2 text-primary-500 leading-none text-left normal-case"
                     >
                         {/* Word 0: DEVELOPER */}
                         <span
                             ref={word0Ref}
                             aria-hidden="true"
-                            className="absolute inset-0 flex items-center whitespace-nowrap leading-none"
+                            className="absolute inset-0 flex items-center whitespace-nowrap leading-none normal-case"
                         >
                             {ROLES[0].split("").map((char, i) => (
                                 <span
                                     key={`w0-${i}`}
-                                    className="char inline-block will-change-transform leading-none"
+                                    className="char inline-block will-change-transform leading-none normal-case"
                                 >
                                     {char}
                                 </span>
@@ -206,12 +206,12 @@ export function Hero() {
                         <span
                             ref={word1Ref}
                             aria-hidden="true"
-                            className="absolute inset-0 flex items-center whitespace-nowrap leading-none"
+                            className="absolute inset-0 flex items-center whitespace-nowrap tracking-[0.11em] leading-none normal-case"
                         >
                             {ROLES[1].split("").map((char, i) => (
                                 <span
                                     key={`w1-${i}`}
-                                    className="char inline-block will-change-transform leading-none"
+                                    className="char inline-block will-change-transform leading-none normal-case"
                                 >
                                     {char}
                                 </span>
@@ -223,24 +223,24 @@ export function Hero() {
                 {/* Line 3: BASED IN PHILIPPINES. */}
                 <p
                     ref={line3Ref}
-                    className="hero-line font-pixel-circle text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-ink-300 tracking-wider uppercase select-none will-change-transform whitespace-nowrap leading-[1.15] text-center"
+                    className="hero-line font-pixel-circle text-3xl sm:text-4xl lg:text-6xl text-ink-300 tracking-wider normal-case select-none will-change-transform whitespace-nowrap leading-[1.15] text-center"
                 >
-                    BASED IN PHILIPPINES.
+                    based in Philippines.
                 </p>
             </div>
 
             {/* 3rd Row: Description and Actions at the top center of Row 3 */}
             <div
                 ref={bottomRowRef}
-                className="relative z-10 w-full flex flex-col items-center justify-start gap-3 sm:gap-4 text-center will-change-transform"
+                className="relative z-10 w-full flex flex-col items-center justify-start gap-4 sm:gap-8 lg:gap-12 py-4 text-center will-change-transform"
             >
                 {/* Center Description */}
-                <p className="text-sm sm:text-base md:text-lg text-ink-500 max-w-3xl leading-relaxed text-center">
+                <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-ink-500 max-w-6xl tracking-[0.01em] leading-[1.15] text-center">
                     Designing and developing visually stunning, technically proficient websites tailored to client needs.
                 </p>
 
                 {/* Center Actions */}
-                <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 shrink-0 text-sm sm:text-base font-mono tracking-wider uppercase py-3">
+                <div className="flex flex-wrap items-center justify-center shrink-0 text-sm sm:text-base font-mono tracking-wider uppercase">
                     <Link
                         href="/contact"
                         onClick={(e) => {
@@ -249,7 +249,7 @@ export function Hero() {
                         }}
                         onMouseEnter={() => setIsHoveredTalk(true)}
                         onMouseLeave={() => setIsHoveredTalk(false)}
-                        className="relative group inline-flex items-center justify-center gap-2 px-6 py-2.5 sm:px-7 sm:py-3 bg-transparent rounded-none text-ink-300 hover:text-primary-500 transition-colors uppercase cursor-pointer select-none"
+                        className="relative group inline-flex items-center justify-center px-6 py-2.5 sm:px-7 sm:py-3 bg-canvas rounded-none text-ink-300 hover:text-primary-500 transition-colors uppercase cursor-pointer select-none"
                     >
                         {/* Extended crosshair borders forming plus corners */}
                         <span aria-hidden="true" className="absolute -left-2 -right-2 top-0 border-t border-black pointer-events-none" />

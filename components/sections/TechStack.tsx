@@ -146,7 +146,7 @@ export function TechStack() {
             <div className="w-5 h-5 sm:w-6 sm:h-6 shrink-0 flex items-center justify-center filter grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
               <StackIcon name={item.iconName} className="w-full h-full object-contain" />
             </div>
-            <span className="font-mono text-xs sm:text-sm tracking-wider uppercase text-black/75 group-hover:text-black font-medium transition-colors whitespace-nowrap">
+            <span className="font-mono text-sm sm:text-base tracking-wider uppercase text-black/75 group-hover:text-black font-medium transition-colors whitespace-nowrap">
               {item.name}
             </span>
           </div>
@@ -163,7 +163,7 @@ export function TechStack() {
             <div className="w-5 h-5 sm:w-6 sm:h-6 shrink-0 flex items-center justify-center filter grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
               <StackIcon name={item.iconName} className="w-full h-full object-contain" />
             </div>
-            <span className="font-mono text-xs sm:text-sm tracking-wider uppercase text-black/75 group-hover:text-black font-medium transition-colors whitespace-nowrap">
+            <span className="font-mono text-sm sm:text-base tracking-wider uppercase text-black/75 group-hover:text-black font-medium transition-colors whitespace-nowrap">
               {item.name}
             </span>
           </div>
@@ -195,9 +195,8 @@ export function TechStack() {
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
         onPointerCancel={handlePointerUp}
-        className={`w-full overflow-hidden flex items-center border-y border-black/15 ${
-          isGrabbing ? "cursor-grabbing" : "cursor-grab"
-        }`}
+        className={`w-full overflow-hidden flex items-center border-y border-black/15 ${isGrabbing ? "cursor-grabbing" : "cursor-grab"
+          }`}
       >
         <div
           ref={trackRef}

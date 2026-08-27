@@ -10,7 +10,7 @@ interface PageTransitionContextType {
 }
 
 const PageTransitionContext = createContext<PageTransitionContextType>({
-    navigateTo: () => {},
+    navigateTo: () => { },
     isTransitioning: false,
 });
 
@@ -304,13 +304,13 @@ export function PageTransitionProvider({ children }: { children: React.ReactNode
                         </svg>
                     </div>
 
-                    <span className="mt-4 font-mono text-xs tracking-widest text-white/90 uppercase font-semibold">
+                    <span className="mt-4 font-mono text-sm sm:text-base tracking-widest text-white/90 uppercase font-semibold">
                         LOADING
                     </span>
 
                     {/* Bottom center handle */}
                     <div className="absolute bottom-8 sm:bottom-10 inset-x-0 flex items-center justify-center text-center pointer-events-none">
-                        <span className=" text-white/90 text-sm sm:text-sm md:text-base tracking-widest  select-none">
+                        <span className="text-white/90 text-sm sm:text-base tracking-widest select-none">
                             @echong
                         </span>
                     </div>

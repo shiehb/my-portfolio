@@ -110,6 +110,7 @@ body {
 
 /* Accessibility: respect user reduced-motion preference */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -128,7 +129,6 @@ body {
   font-family: var(--font-pixel-dots);
   font-variation-settings: "ELSH" 20;
   letter-spacing: 0.04em;
-  text-transform: uppercase;
 }
 
 .text-7xl {

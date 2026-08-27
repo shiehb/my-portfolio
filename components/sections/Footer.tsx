@@ -20,7 +20,7 @@ export function Footer() {
       className="w-full min-h-dvh bg-transparent py-16 sm:py-24 text-center flex flex-col items-center justify-center relative"
     >
       <div className="max-w-7xl mx-auto flex flex-col items-center justify-center gap-3">
-        <p className="font-pixel-circle text-ink-300 text-sm sm:text-base md:text-lg tracking-widest uppercase">
+        <p className="font-pixel-circle text-ink-300 text-sm sm:text-base tracking-widest uppercase">
           © {currentYear} Jericho Urbano
         </p>
         <p className="text-sm sm:text-base font-mono text-primary-500 tracking-wider font-medium">

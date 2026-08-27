@@ -14,9 +14,9 @@ const variantClass: Record<ButtonVariant, string> = {
 };
 
 const sizeClass: Record<ButtonSize, string> = {
-    sm: "text-xs py-1.5 px-3",
-    md: "text-sm py-2.5 px-5",
-    lg: "text-base py-3 px-6",
+    sm: "text-sm sm:text-base py-1.5 px-3",
+    md: "text-sm sm:text-base py-2.5 px-5",
+    lg: "text-sm sm:text-base py-3 px-6",
 };
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {

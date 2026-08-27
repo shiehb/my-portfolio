@@ -26,7 +26,7 @@ export const SOCIALS = [
     { label: "GITHUB", href: "https://github.com/jerichourbano" },
     { label: "LINKEDIN", href: "https://linkedin.com/in/jerichourbano" },
     { label: "INSTAGRAM", href: "https://instagram.com/jerichourbano" },
-    
+
 ];
 
 export const EMAIL = "jerichourbano.01.01.04@gmail.com";
@@ -193,16 +193,15 @@ export function MenuOverlay({ isOpen, onClose, onNavigate }: MenuOverlayProps) {
                                 onMouseLeave={() => setHoveredLink(null)}
                                 className="nav-stagger-item group flex items-baseline gap-4 md:gap-6 text-left cursor-pointer focus-visible:outline-none"
                             >
-                                <span className={`font-pixel-circle text-[clamp(1.25rem,2.5vw,2rem)] leading-none select-none tracking-widest shrink-0 transition-colors duration-300 ${
-                                    isHovered || isActive ? "text-primary-500" : "text-primary-500/70"
-                                }`}>
+                                <span className={`font-pixel-circle text-base sm:text-lg md:text-xl lg:text-2xl leading-none select-none tracking-widest shrink-0 transition-colors duration-300 ${isHovered || isActive ? "text-primary-500" : "text-primary-500/70"
+                                    }`}>
                                     {link.num}
                                 </span>
 
                                 <AnimatedSplitText
                                     text={link.label}
                                     isHovered={isHovered || isActive}
-                                    className="font-pixel-circle text-[clamp(2.75rem,7vw,5.5rem)] tracking-wider"
+                                    className="font-pixel-circle text-3xl sm:text-4xl lg:text-6xl tracking-wider"
                                     colorTop={isActive ? "text-primary-500" : "text-ink-300"}
                                     colorBottom="text-primary-500"
                                 />
@@ -214,13 +213,13 @@ export function MenuOverlay({ isOpen, onClose, onNavigate }: MenuOverlayProps) {
                 {/* Contact Info & Socials */}
                 <div className="flex flex-col gap-8 items-start justify-center text-ink-300">
                     <div className="nav-stagger-item flex flex-col gap-2">
-                        <span className="text-xs uppercase tracking-widest text-ink-500 font-mono">
+                        <span className="text-sm sm:text-base uppercase tracking-widest text-ink-500 font-mono">
                             Get In Touch
                         </span>
                         <div className="flex items-center gap-3">
                             <a
                                 href={`mailto:${EMAIL}`}
-                                className="text-lg md:text-xl text-primary-500 hover:text-ink-300 font-medium transition-colors border-b border-primary-500/40 pb-0.5"
+                                className="text-sm sm:text-base text-primary-500 hover:text-ink-300 font-medium transition-colors border-b border-primary-500/40 pb-0.5"
                             >
                                 {EMAIL}
                             </a>
@@ -242,7 +241,7 @@ export function MenuOverlay({ isOpen, onClose, onNavigate }: MenuOverlayProps) {
                     </div>
 
                     <div className="nav-stagger-item flex flex-col gap-3">
-                        <span className="text-xs uppercase tracking-widest text-ink-500 font-mono">
+                        <span className="text-sm sm:text-base uppercase tracking-widest text-ink-500 font-mono">
                             Social Profiles
                         </span>
                         <ul className="flex flex-col gap-3">
@@ -257,18 +256,17 @@ export function MenuOverlay({ isOpen, onClose, onNavigate }: MenuOverlayProps) {
                                             rel="noopener noreferrer"
                                             onMouseEnter={() => setHoveredSocial(label)}
                                             onMouseLeave={() => setHoveredSocial(null)}
-                                            className="group inline-flex items-center gap-2 text-base text-ink-300/80 hover:text-primary-500 transition-colors py-0.5"
+                                            className="group inline-flex items-center gap-2 text-sm sm:text-base text-ink-300/80 hover:text-primary-500 transition-colors py-0.5"
                                         >
                                             <AnimatedSplitText
                                                 text={label}
                                                 isHovered={isHovered}
-                                                className="font-mono text-base tracking-wide"
+                                                className="font-mono text-sm sm:text-base tracking-wide"
                                                 colorTop="text-ink-300/80"
                                                 colorBottom="text-primary-500"
                                             />
-                                            <ArrowUpRight className={`w-4 h-4 transition-transform duration-300 ease-out ${
-                                                isHovered ? "text-primary-500 translate-x-0.5 -translate-y-0.5 opacity-100" : "text-ink-300 opacity-60"
-                                            }`} />
+                                            <ArrowUpRight className={`w-4 h-4 transition-transform duration-300 ease-out ${isHovered ? "text-primary-500 translate-x-0.5 -translate-y-0.5 opacity-100" : "text-ink-300 opacity-60"
+                                                }`} />
                                         </a>
                                     </li>
                                 );
