@@ -232,7 +232,7 @@ export function Hero() {
             {/* 3rd Row: Description and Actions at the top center of Row 3 */}
             <div
                 ref={bottomRowRef}
-                className="relative z-10 w-full flex flex-col items-center justify-start gap-4 sm:gap-8 lg:gap-12 py-4 text-center will-change-transform"
+                className="relative z-10 w-full flex flex-col items-center justify-start gap-4 sm:gap-8 lg:gap-12 py-2 sm:py-4 md:py-6 text-center will-change-transform"
             >
                 {/* Center Description */}
                 <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-ink-500 max-w-6xl tracking-[0.01em] leading-[1.15] text-center">
