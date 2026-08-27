@@ -193,8 +193,7 @@ export function MenuOverlay({ isOpen, onClose, onNavigate }: MenuOverlayProps) {
                                 onMouseLeave={() => setHoveredLink(null)}
                                 className="nav-stagger-item group flex items-baseline gap-4 md:gap-6 text-left cursor-pointer focus-visible:outline-none"
                             >
-                                <span className={`font-pixel-circle text-base sm:text-lg md:text-xl lg:text-2xl leading-none select-none tracking-widest shrink-0 transition-colors duration-300 ${isHovered || isActive ? "text-primary-500" : "text-primary-500/70"
-                                    }`}>
+                                <span className="font-pixel-circle text-sm sm:text-base leading-none select-none tracking-widest">
                                     {link.num}
                                 </span>
 
