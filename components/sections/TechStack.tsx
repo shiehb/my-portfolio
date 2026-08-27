@@ -10,22 +10,23 @@ interface TechItem {
 
 export function TechStack() {
   const row1Tech: TechItem[] = [
+    { name: "MOTION", iconName: "motion" },
     { name: "GSAP", iconName: "gsap" },
-    { name: "JAVASCRIPT", iconName: "js" },
-    { name: "TYPESCRIPT", iconName: "typescript" },
+    { name: "NEXT.JS", iconName: "nextjs2" },
     { name: "TAILWIND", iconName: "tailwindcss" },
-        { name: "MOTION", iconName: "motion" },
+    { name: "TYPESCRIPT", iconName: "typescript" },
     { name: "REACT", iconName: "react" },
-
+    { name: "JAVASCRIPT", iconName: "js" },
   ];
 
   const row2Tech: TechItem[] = [
-    { name: "DJANGO", iconName: "django" },
+    { name: "TAILWIND", iconName: "tailwindcss" },
+    { name: "TYPESCRIPT", iconName: "typescript" },
+    { name: "REACT", iconName: "react" },
+    { name: "JAVASCRIPT", iconName: "js" },
+    { name: "MOTION", iconName: "motion" },
+    { name: "GSAP", iconName: "gsap" },
     { name: "NEXT.JS", iconName: "nextjs2" },
-    { name: "POSTGRESQL", iconName: "postgresql" },
-    { name: "PYTHON", iconName: "python" },
-    { name: "NODE.JS", iconName: "nodejs" },
-    { name: "SUPABASE", iconName: "supabase" },
   ];
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -175,7 +176,7 @@ export function TechStack() {
     <section
       id="stack"
       aria-label="My Stack"
-      className="relative w-full py-10 sm:py-14 md:py-16 lg:py-20 select-none overflow-hidden"
+      className="relative w-full select-none overflow-hidden"
     >
       {/* Edge feathering */}
       <div

@@ -19,7 +19,6 @@ export function Hero() {
     const word0Ref = useRef<HTMLSpanElement>(null);
     const word1Ref = useRef<HTMLSpanElement>(null);
 
-    const [isHoveredCv, setIsHoveredCv] = useState(false);
     const [isHoveredTalk, setIsHoveredTalk] = useState(false);
 
     const { navigateTo } = usePageTransition();
@@ -162,7 +161,7 @@ export function Hero() {
             id="hero"
             ref={rootRef}
             aria-label="Introduction"
-            className="relative isolate min-h-[calc(100dvh-200px)] grid grid-rows-[1fr_auto_1fr] items-stretch text-center overflow-x-clip"
+            className="relative isolate min-h-[calc(100dvh-200px)] grid grid-rows-[1fr_auto_1fr] max-w-[1920px] mx-auto px-2 sm:px-4 md:px-8 lg:px-12 xl:px-16 2xl:px-20 items-stretch text-center overflow-x-clip"
         >
             {/* 1st Row: Spacing placeholder to keep middle text centered */}
             <div className="relative z-10" />
@@ -237,32 +236,11 @@ export function Hero() {
             >
                 {/* Center Description */}
                 <p className="text-sm sm:text-base md:text-lg text-ink-500 max-w-3xl leading-relaxed text-center">
-                     Designing and Developing visuall stunning and technicall proficient website for clients.
+                    Designing and developing visually stunning, technically proficient websites tailored to client needs.
                 </p>
 
                 {/* Center Actions */}
-                <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 shrink-0 text-sm sm:text-base font-mono tracking-wider uppercase pt-3">
-                    <a
-                        href="/resume.pdf"
-                        download
-                        onMouseEnter={() => setIsHoveredCv(true)}
-                        onMouseLeave={() => setIsHoveredCv(false)}
-                        className="relative group inline-flex items-center justify-center px-6 py-2.5 sm:px-7 sm:py-3 bg-transparent rounded-none text-ink-300 hover:text-primary-500 transition-colors uppercase cursor-pointer select-none"
-                    >
-                        {/* Extended crosshair borders forming plus corners */}
-                        <span aria-hidden="true" className="absolute -left-2 -right-2 top-0 border-t border-black pointer-events-none" />
-                        <span aria-hidden="true" className="absolute -left-2 -right-2 bottom-0 border-b border-black pointer-events-none" />
-                        <span aria-hidden="true" className="absolute -top-2 -bottom-2 left-0 border-l border-black pointer-events-none" />
-                        <span aria-hidden="true" className="absolute -top-2 -bottom-2 right-0 border-r border-black pointer-events-none" />
-
-                        <AnimatedSplitText
-                            text="DOWNLOAD CV"
-                            isHovered={isHoveredCv}
-                            className="font-mono text-sm sm:text-base tracking-wider"
-                            colorTop="text-ink-300"
-                            colorBottom="text-primary-500"
-                        />
-                    </a>
+                <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 shrink-0 text-sm sm:text-base font-mono tracking-wider uppercase py-3">
                     <Link
                         href="/contact"
                         onClick={(e) => {
@@ -287,9 +265,8 @@ export function Hero() {
                             colorBottom="text-primary-500"
                         />
                         <ArrowUpRight
-                            className={`w-4 h-4 transition-transform duration-300 ease-out ${
-                                isHoveredTalk ? "text-primary-500 translate-x-0.5 -translate-y-0.5" : "text-ink-300"
-                            }`}
+                            className={`w-4 h-4 transition-transform duration-300 ease-out ${isHoveredTalk ? "text-primary-500 translate-x-0.5 -translate-y-0.5" : "text-ink-300"
+                                }`}
                         />
                     </Link>
                 </div>
