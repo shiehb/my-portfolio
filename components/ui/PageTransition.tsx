@@ -3,9 +3,10 @@
 import React, { createContext, useContext, useRef, useState, useCallback, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import gsap from "gsap";
+import { getCurvePathsUp } from "./CurveTransition";
 
 interface PageTransitionContextType {
-    navigateTo: (href: string) => void;
+    navigateTo: (href: string, label?: string) => void;
     isTransitioning: boolean;
 }
 
@@ -16,110 +17,122 @@ const PageTransitionContext = createContext<PageTransitionContextType>({
 
 export const usePageTransition = () => useContext(PageTransitionContext);
 
+const TRANSITION_BG_COLOR = "#c9c9c9"; // Synchronized with menu overlay surface color
+
+const ROUTE_LABELS: Record<string, string> = {
+    "/": "HOME",
+    "/about": "ABOUT",
+    "/work": "WORK",
+    "/contact": "CONTACT",
+};
+
+export function getRouteLabel(href: string): string {
+    const clean = href.split("?")[0].split("#")[0];
+    if (ROUTE_LABELS[clean]) return ROUTE_LABELS[clean];
+    const stripped = clean.replace(/^\//, "").toUpperCase();
+    return stripped || "HOME";
+}
+
 export function PageTransitionProvider({ children }: { children: React.ReactNode }) {
     const router = useRouter();
     const pathname = usePathname();
     const [isTransitioning, setIsTransitioning] = useState(false);
+    const [transitionText, setTransitionText] = useState(() => (!pathname || pathname === "/" ? "Hey There" : getRouteLabel(pathname)));
 
     const overlayRef = useRef<HTMLDivElement>(null);
-    const enterCircleRef = useRef<SVGCircleElement>(null);
-    const exitHoleCircleRef = useRef<SVGCircleElement>(null);
-    const exitLayerRef = useRef<SVGSVGElement>(null);
-    const loaderRef = useRef<HTMLDivElement>(null);
-    const spinnerRef = useRef<SVGSVGElement>(null);
+    const pathRef = useRef<SVGPathElement>(null);
+    const textRef = useRef<HTMLDivElement>(null);
 
-    // Initial page load / reload transition effect (Start Zoom-in -> Loading -> Exit Hole Zoom-in)
+    // Initial page load / reload transition effect
     useEffect(() => {
         const overlay = overlayRef.current;
-        const enterCircle = enterCircleRef.current;
-        const exitHole = exitHoleCircleRef.current;
-        const exitLayer = exitLayerRef.current;
-        const loader = loaderRef.current;
-        const spinner = spinnerRef.current;
+        const path = pathRef.current;
+        const textEl = textRef.current;
 
-        if (!overlay || !enterCircle || !exitHole || !exitLayer || !loader || !spinner) return;
+        if (!overlay || !path || !textEl) return;
 
-        // Reset visual state
-        gsap.set(overlay, { display: "block", pointerEvents: "auto" });
-        gsap.set(enterCircle, { opacity: 1, scale: 0, transformOrigin: "50% 50%" });
-        gsap.set(exitLayer, { opacity: 0 });
-        gsap.set(exitHole, { scale: 0, transformOrigin: "50% 50%" });
-        gsap.set(loader, { opacity: 0 });
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        const paths = getCurvePathsUp(width, height, 250);
+
+        const initialLabel = !pathname || pathname === "/" ? "Hey There" : getRouteLabel(pathname);
+        setTransitionText(initialLabel);
+
+        // Reset visual state: start covered flat
+        gsap.set(overlay, { display: "flex", pointerEvents: "auto" });
+        gsap.set(path, { attr: { d: paths.flat } });
+        gsap.set(textEl, { opacity: 1, y: 0, scale: 1 });
 
         const reloadTl = gsap.timeline({
-            delay: 0.1,
+            delay: 0.3,
             onComplete: () => {
                 gsap.set(overlay, { display: "none", pointerEvents: "none" });
             },
         });
 
-        // 1. START: Zoom in SVG circle from center on transparent bg
-        reloadTl.to(enterCircle, {
-            scale: 2.2,
-            duration: 0.65,
-            ease: "power3.inOut",
-        });
-
-        // 2. LOADING: Center animated SVG with --color-primary-500 bg (No zoom scale, smooth fade)
-        reloadTl.to(
-            loader,
-            {
-                opacity: 1,
-                duration: 0.25,
-                ease: "power2.out",
-            },
-            "-=0.15"
-        );
-
-        reloadTl.to(
-            spinner,
-            {
-                rotation: "+=360",
-                duration: 0.8,
-                ease: "power1.inOut",
-            },
-            "<"
-        );
-
-        reloadTl.to(loader, {
+        // 1. Hold text display briefly then fade up
+        reloadTl.to(textEl, {
             opacity: 0,
-            duration: 0.2,
+            y: -18,
+            duration: 0.25,
+            delay: 0.4,
             ease: "power2.in",
         });
 
-        // 3. EXIT: Zoom in transparent SVG from center (hole/aperture) revealing the page
-        reloadTl.set(exitLayer, { opacity: 1 });
-        reloadTl.set(enterCircle, { opacity: 0 });
-        reloadTl.to(exitHole, {
-            scale: 2.2,
-            duration: 0.7,
-            ease: "power3.inOut",
-        });
+        // 2. CURVE EXIT: Morph bottom curve upwards with downward arch to reveal page
+        reloadTl.to(path, {
+            duration: 0.45,
+            ease: "power3.in",
+            attr: { d: paths.curveUpExit },
+        })
+            .to(path, {
+                duration: 0.25,
+                ease: "power2.out",
+                attr: { d: paths.endTop },
+            });
 
         return () => {
             reloadTl.kill();
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const navigateTo = useCallback(
-        (targetHref: string) => {
+        (targetHref: string, customLabel?: string) => {
             if (isTransitioning) return;
-            if (pathname === targetHref) return;
 
+            let label = customLabel || getRouteLabel(targetHref);
+            if (targetHref === "/" && pathname === "/") {
+                label = "Hey There";
+            } else if (targetHref === "/") {
+                label = "HOME";
+            }
+
+            setTransitionText(label);
             setIsTransitioning(true);
 
             const overlay = overlayRef.current;
-            const enterCircle = enterCircleRef.current;
-            const exitHole = exitHoleCircleRef.current;
-            const exitLayer = exitLayerRef.current;
-            const loader = loaderRef.current;
-            const spinner = spinnerRef.current;
+            const path = pathRef.current;
+            const textEl = textRef.current;
 
-            if (!overlay || !enterCircle || !exitHole || !exitLayer || !loader || !spinner) {
-                router.push(targetHref);
+            if (!overlay || !path || !textEl) {
+                if (pathname === targetHref) {
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                } else {
+                    router.push(targetHref);
+                }
                 setIsTransitioning(false);
                 return;
             }
+
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            const paths = getCurvePathsUp(width, height, 250);
+
+            // Reset start states: start down at bottom of screen
+            gsap.set(overlay, { display: "flex", pointerEvents: "auto" });
+            gsap.set(path, { attr: { d: paths.startDown } });
+            gsap.set(textEl, { opacity: 0, y: 24, scale: 0.96 });
 
             const tl = gsap.timeline({
                 onComplete: () => {
@@ -128,71 +141,68 @@ export function PageTransitionProvider({ children }: { children: React.ReactNode
                 },
             });
 
-            // Reset start states
-            gsap.set(overlay, { display: "block", pointerEvents: "auto" });
-            gsap.set(enterCircle, { opacity: 1, scale: 0, transformOrigin: "50% 50%" });
-            gsap.set(exitLayer, { opacity: 0 });
-            gsap.set(exitHole, { scale: 0, transformOrigin: "50% 50%" });
-            gsap.set(loader, { opacity: 0 });
+            // ==========================================
+            // PHASE 1: CURVE ENTRANCE (Curtain sweeps UP from bottom)
+            // ==========================================
+            tl.to(path, {
+                duration: 0.45,
+                ease: "power3.in",
+                attr: { d: paths.curveUpEnter },
+            })
+                .to(path, {
+                    duration: 0.3,
+                    ease: "power2.out",
+                    attr: { d: paths.flat },
+                });
 
             // ==========================================
-            // PHASE 1: START TRANSITION
-            // Zoom in SVG circle from center on transparent bg
-            // ==========================================
-            tl.to(enterCircle, {
-                scale: 2.2,
-                duration: 0.65,
-                ease: "power3.inOut",
-            });
-
-            // ==========================================
-            // PHASE 2: LOADING STATE
-            // Solid --color-primary-500 bg with center animated SVG (No scale zoom, smooth fade)
+            // PHASE 2: SHOW DESTINATION NAVIGATION TEXT
             // ==========================================
             tl.to(
-                loader,
+                textEl,
                 {
                     opacity: 1,
-                    duration: 0.25,
+                    y: 0,
+                    scale: 1,
+                    duration: 0.3,
                     ease: "power2.out",
                 },
-                "-=0.15"
+                "-=0.2"
             );
 
-            // Change page in Next.js router
+            // Change page in Next.js router or reset scroll for same-page navigation
             tl.add(() => {
-                router.push(targetHref);
+                if (pathname === targetHref) {
+                    window.scrollTo({ top: 0, behavior: "instant" });
+                } else {
+                    router.push(targetHref);
+                }
             }, "+=0.05");
 
-            // Spin & animate loader during route load
-            tl.to(
-                spinner,
-                {
-                    rotation: "+=360",
-                    duration: 0.8,
-                    ease: "power1.inOut",
-                },
-                "<"
-            );
+            // Hold text briefly while new page renders
+            tl.to({}, { duration: 0.35 });
 
-            // Hide loader smoothly without zooming out
-            tl.to(loader, {
+            // Hide text smoothly before exit
+            tl.to(textEl, {
                 opacity: 0,
-                duration: 0.2,
+                y: -18,
+                duration: 0.22,
                 ease: "power2.in",
             });
 
             // ==========================================
-            // PHASE 3: EXIT TRANSITION
-            // Zoom in transparent hole from center (aperture reveal)
+            // PHASE 3: CURVE EXIT (Curtain sweeps UP out of screen)
             // ==========================================
-            tl.set(exitLayer, { opacity: 1 });
-            tl.set(enterCircle, { opacity: 0 });
-            tl.to(exitHole, {
-                scale: 2.2,
-                duration: 0.7,
-                ease: "power3.inOut",
-            });
+            tl.to(path, {
+                duration: 0.4,
+                ease: "power3.in",
+                attr: { d: paths.curveUpExit },
+            })
+                .to(path, {
+                    duration: 0.25,
+                    ease: "power2.out",
+                    attr: { d: paths.endTop },
+                });
         },
         [isTransitioning, pathname, router]
     );
@@ -201,121 +211,36 @@ export function PageTransitionProvider({ children }: { children: React.ReactNode
         <PageTransitionContext.Provider value={{ navigateTo, isTransitioning }}>
             {children}
 
-            {/* Transition Viewport Layer */}
+            {/* Transition Viewport Layer with Curved SVG Morphing Curtain */}
             <div
                 ref={overlayRef}
-                aria-hidden="true"
-                className="fixed inset-0 z-[9999] pointer-events-none hidden"
+                aria-hidden={!isTransitioning}
+                className="fixed inset-0 z-[9999] pointer-events-none hidden flex-col items-center justify-center"
             >
-                {/* SVG 1: Start Phase (Solid Center Circle Zooming In) */}
+                {/* SVG Morphing Canvas */}
                 <svg
-                    className="absolute inset-0 w-full h-full"
-                    viewBox="0 0 100 100"
-                    preserveAspectRatio="xMidYMid slice"
+                    className="absolute inset-0 w-full h-full pointer-events-none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
                 >
-                    <circle
-                        ref={enterCircleRef}
-                        cx="50"
-                        cy="50"
-                        r="75"
-                        fill="var(--color-primary-500, #ff4d00)"
+                    <path
+                        ref={pathRef}
+                        fill={TRANSITION_BG_COLOR}
+                        d="M0 0 L1000 0 L1000 0 Q500 0 0 0 Z"
                     />
                 </svg>
 
-                {/* SVG 2: Exit Phase (Mask Aperture Hole Zooming In from Center) */}
-                <svg
-                    ref={exitLayerRef}
-                    className="absolute inset-0 w-full h-full"
-                    viewBox="0 0 100 100"
-                    preserveAspectRatio="xMidYMid slice"
-                >
-                    <defs>
-                        <mask id="transition-exit-hole-mask">
-                            {/* Solid white = visible primary orange layer */}
-                            <rect width="100" height="100" fill="white" />
-                            {/* Black circle = transparent cut-out hole zooming in */}
-                            <circle
-                                ref={exitHoleCircleRef}
-                                cx="50"
-                                cy="50"
-                                r="75"
-                                fill="black"
-                            />
-                        </mask>
-                    </defs>
-                    <rect
-                        width="100"
-                        height="100"
-                        fill="var(--color-primary-500, #ff4d00)"
-                        mask="url(#transition-exit-hole-mask)"
-                    />
-                </svg>
-
-                {/* Center Animated SVG Loader */}
+                {/* Center Transition Text in Pixel Curve Typography */}
                 <div
-                    ref={loaderRef}
-                    className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-10"
+                    ref={textRef}
+                    className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-10 px-4 text-center"
                 >
-                    <div className="relative flex items-center justify-center">
-                        <svg
-                            ref={spinnerRef}
-                            className="w-20 h-20 text-white drop-shadow-md"
-                            viewBox="0 0 100 100"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            {/* Outer Segmented Ring */}
-                            <circle
-                                cx="50"
-                                cy="50"
-                                r="42"
-                                stroke="currentColor"
-                                strokeWidth="2.5"
-                                strokeDasharray="14 10"
-                                opacity="0.85"
-                            />
-
-                            {/* Inner Geometric Star / Crosshair */}
-                            <circle
-                                cx="50"
-                                cy="50"
-                                r="28"
-                                stroke="currentColor"
-                                strokeWidth="1.5"
-                                strokeDasharray="4 6"
-                                opacity="0.6"
-                            />
-
-                            {/* Center Pixel Core */}
-                            <rect
-                                x="46"
-                                y="46"
-                                width="8"
-                                height="8"
-                                fill="currentColor"
-                                className="animate-pulse"
-                            />
-
-                            {/* Radial Tick Markers */}
-                            <line x1="50" y1="2" x2="50" y2="10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-                            <line x1="50" y1="90" x2="50" y2="98" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-                            <line x1="2" y1="50" x2="10" y2="50" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-                            <line x1="90" y1="50" x2="98" y2="50" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-                        </svg>
-                    </div>
-
-                    <span className="mt-4 font-mono text-sm sm:text-base tracking-widest text-white/90 uppercase font-semibold">
-                        LOADING
-                    </span>
-
-                    {/* Bottom center handle */}
-                    <div className="absolute bottom-8 sm:bottom-10 inset-x-0 flex items-center justify-center text-center pointer-events-none">
-                        <span className="text-white/90 text-sm sm:text-base tracking-widest select-none">
-                            @echong
-                        </span>
-                    </div>
+                    <h2 className="font-pixel-circle text-6xl lg:text-5xl xl:text-7xl tracking-wider text-center text-ink-300 select-none">
+                        {transitionText}
+                    </h2>
                 </div>
             </div>
         </PageTransitionContext.Provider>
     );
 }
+

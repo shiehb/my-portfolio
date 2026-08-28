@@ -32,7 +32,7 @@ export function AnimatedSplitText({
     const chars = text.split("");
 
     return (
-        <span className={`relative inline-flex overflow-hidden leading-none select-none ${className}`}>
+        <span className={`relative inline-flex overflow-hidden leading-none ${className}`}>
             {/* Primary Layer (slides up on hover) */}
             <span
                 aria-hidden="true"

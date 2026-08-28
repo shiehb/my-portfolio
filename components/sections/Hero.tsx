@@ -163,8 +163,8 @@ export function Hero() {
             aria-label="Introduction"
             className="relative isolate min-h-[calc(100dvh-200px)] grid grid-rows-[1fr_auto_1fr] max-w-[1920px] mx-auto px-2 sm:px-4 md:px-8 lg:px-12 xl:px-16 2xl:px-20 items-stretch text-center overflow-x-clip"
         >
-            {/* 1st Row: Spacing placeholder to keep middle text centered */}
-            <div className="relative z-10" />
+            {/* Top Row Spacer */}
+            <div className="relative z-10 w-full h-8 sm:h-12 pointer-events-none" aria-hidden="true" />
 
             {/* 2nd Row: Text dead center on the screen */}
             <div className="relative z-10 flex flex-col items-center justify-center w-full py-0">

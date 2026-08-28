@@ -7,6 +7,7 @@ import { ArrowUpRight } from "lucide-react";
 import gsap from "gsap";
 import { usePageTransition } from "../ui/PageTransition";
 import { AnimatedSplitText } from "../ui/AnimatedSplitText";
+import { getCurvePaths } from "../ui/CurveTransition";
 
 export interface MenuOverlayProps {
     isOpen: boolean;
@@ -46,7 +47,7 @@ interface NavigationListProps {
     pathname: string;
     hoveredLink: string | null;
     setHoveredLink: (href: string | null) => void;
-    onItemClick: (href: string) => void;
+    onItemClick: (href: string, label?: string) => void;
 }
 
 function NavigationList({ pathname, hoveredLink, setHoveredLink, onItemClick }: NavigationListProps) {
@@ -62,7 +63,7 @@ function NavigationList({ pathname, hoveredLink, setHoveredLink, onItemClick }: 
                         href={link.href}
                         onClick={(e) => {
                             e.preventDefault();
-                            onItemClick(link.href);
+                            onItemClick(link.href, link.label);
                         }}
                         onMouseEnter={() => setHoveredLink(link.href)}
                         onMouseLeave={() => setHoveredLink(null)}
@@ -145,11 +146,14 @@ export function MenuOverlay({ isOpen, onClose, onNavigate }: MenuOverlayProps) {
     const contentRef = useRef<HTMLDivElement>(null);
     const pathRef = useRef<SVGPathElement>(null);
     const timelineRef = useRef<gsap.core.Timeline | null>(null);
+    const isNavigatingRef = useRef(false);
 
-    const handleNavigate = (href: string) => {
+    const handleNavigate = (href: string, label?: string) => {
+        // Suppress competing menu exit curve animation so PageTransition handles the full transition cleanly
+        isNavigatingRef.current = true;
         onClose();
         if (onNavigate) onNavigate(href);
-        navigateTo(href);
+        navigateTo(href, label);
     };
 
     useEffect(() => {
@@ -157,17 +161,14 @@ export function MenuOverlay({ isOpen, onClose, onNavigate }: MenuOverlayProps) {
 
         const width = window.innerWidth;
         const height = window.innerHeight;
-
-        const initialPath = `M0 0 L${width} 0 L${width} 0 Q${width / 2} 0 0 0 Z`;
-        const openCurveDown = `M0 0 L${width} 0 L${width} ${height} Q${width / 2} ${height + 250} 0 ${height} Z`;
-        const flatFull = `M0 0 L${width} 0 L${width} ${height} Q${width / 2} ${height} 0 ${height} Z`;
-        const closeCurveUp = `M0 0 L${width} 0 L${width} 0 Q${width / 2} 250 0 0 Z`;
+        const paths = getCurvePaths(width, height, 250);
 
         if (isOpen) {
+            isNavigatingRef.current = false;
             if (timelineRef.current) timelineRef.current.kill();
 
             gsap.set(overlayRef.current, { display: "flex", pointerEvents: "auto" });
-            gsap.set(pathRef.current, { attr: { d: initialPath } });
+            gsap.set(pathRef.current, { attr: { d: paths.initial } });
             gsap.set(contentRef.current, { opacity: 0, y: -20 });
 
             const tl = gsap.timeline();
@@ -175,12 +176,12 @@ export function MenuOverlay({ isOpen, onClose, onNavigate }: MenuOverlayProps) {
             tl.to(pathRef.current, {
                 duration: 0.5,
                 ease: "power3.in",
-                attr: { d: openCurveDown },
+                attr: { d: paths.curveDown },
             })
                 .to(pathRef.current, {
                     duration: 0.35,
                     ease: "power2.out",
-                    attr: { d: flatFull },
+                    attr: { d: paths.flat },
                 })
                 .to(
                     contentRef.current,
@@ -210,6 +211,15 @@ export function MenuOverlay({ isOpen, onClose, onNavigate }: MenuOverlayProps) {
         } else {
             if (timelineRef.current) timelineRef.current.kill();
 
+            // If navigation is occurring, immediately hide menu overlay without overlapping curves
+            if (isNavigatingRef.current) {
+                isNavigatingRef.current = false;
+                if (overlayRef.current) {
+                    gsap.set(overlayRef.current, { display: "none", pointerEvents: "none" });
+                }
+                return;
+            }
+
             const tl = gsap.timeline({
                 onComplete: () => {
                     if (overlayRef.current) {
@@ -238,14 +248,14 @@ export function MenuOverlay({ isOpen, onClose, onNavigate }: MenuOverlayProps) {
                     {
                         duration: 0.28,
                         ease: "power3.in",
-                        attr: { d: closeCurveUp },
+                        attr: { d: paths.curveUp },
                     },
                     "-=0.06"
                 )
                 .to(pathRef.current, {
                     duration: 0.18,
                     ease: "power2.out",
-                    attr: { d: initialPath },
+                    attr: { d: paths.initial },
                 });
 
             timelineRef.current = tl;
