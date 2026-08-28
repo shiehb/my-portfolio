@@ -141,7 +141,7 @@ export function TechStack() {
         {row1Tech.map((item, idx) => (
           <div
             key={`r1-${idx}`}
-            className="group flex items-center justify-center gap-3 w-44 sm:w-52 md:w-60 h-16 sm:h-20 md:h-24 bg-[#f2f2f2] hover:bg-[#eaeaea] transition-colors duration-200 shrink-0 select-none cursor-grab active:cursor-grabbing border-r border-black/15"
+            className="group flex items-center justify-center gap-4 w-44 sm:w-52 md:w-60 h-16 sm:h-20 md:h-24 bg-[#f2f2f2] hover:bg-[#eaeaea] transition-colors duration-200 shrink-0 select-none cursor-grab active:cursor-grabbing border-r border-black/15"
           >
             <div className="w-5 h-5 sm:w-6 sm:h-6 shrink-0 flex items-center justify-center filter grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
               <StackIcon name={item.iconName} className="w-full h-full object-contain" />
@@ -158,7 +158,7 @@ export function TechStack() {
         {row2Tech.map((item, idx) => (
           <div
             key={`r2-${idx}`}
-            className="group flex items-center justify-center gap-3 w-44 sm:w-52 md:w-60 h-16 sm:h-20 md:h-24 bg-[#f2f2f2] hover:bg-[#eaeaea] transition-colors duration-200 shrink-0 select-none cursor-grab active:cursor-grabbing border-r border-black/15"
+            className="group flex items-center justify-center gap-4 w-44 sm:w-52 md:w-60 h-16 sm:h-20 md:h-24 bg-[#f2f2f2] hover:bg-[#eaeaea] transition-colors duration-200 shrink-0 select-none cursor-grab active:cursor-grabbing border-r border-black/15"
           >
             <div className="w-5 h-5 sm:w-6 sm:h-6 shrink-0 flex items-center justify-center filter grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
               <StackIcon name={item.iconName} className="w-full h-full object-contain" />

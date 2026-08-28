@@ -3,9 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowUpRight, Copy, Check } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import gsap from "gsap";
-import { Magnetic } from "../ui/Magnetic";
 import { usePageTransition } from "../ui/PageTransition";
 import { AnimatedSplitText } from "../ui/AnimatedSplitText";
 
@@ -15,26 +14,130 @@ export interface MenuOverlayProps {
     onNavigate?: (targetId: string) => void;
 }
 
-export const NAV_LINKS = [
-    { num: "[01]", label: "HOME", href: "/" },
-    { num: "[02]", label: "ABOUT", href: "/about" },
-    { num: "[03]", label: "WORK", href: "/work" },
-    { num: "[04]", label: "CONTACT", href: "/contact" },
+export interface NavLinkItem {
+    label: string;
+    href: string;
+}
+
+export interface SocialLinkItem {
+    label: string;
+    href: string;
+}
+
+export const NAV_LINKS: NavLinkItem[] = [
+    { label: "HOME", href: "/" },
+    { label: "ABOUT", href: "/about" },
+    { label: "WORK", href: "/work" },
+    { label: "CONTACT", href: "/contact" },
 ];
 
-export const SOCIALS = [
+export const SOCIALS: SocialLinkItem[] = [
     { label: "GITHUB", href: "https://github.com/jerichourbano" },
     { label: "LINKEDIN", href: "https://linkedin.com/in/jerichourbano" },
     { label: "INSTAGRAM", href: "https://instagram.com/jerichourbano" },
-
 ];
 
 export const EMAIL = "jerichourbano.01.01.04@gmail.com";
 
+/* -------------------------------------------------------------------------- */
+/* Sub-Component: Navigation List                                              */
+/* -------------------------------------------------------------------------- */
+interface NavigationListProps {
+    pathname: string;
+    hoveredLink: string | null;
+    setHoveredLink: (href: string | null) => void;
+    onItemClick: (href: string) => void;
+}
+
+function NavigationList({ pathname, hoveredLink, setHoveredLink, onItemClick }: NavigationListProps) {
+    return (
+        <nav aria-label="Main Navigation" className="flex-1 flex flex-col justify-center gap-6 md:gap-8 items-center text-center w-full my-auto">
+            {NAV_LINKS.map((link) => {
+                const isHovered = hoveredLink === link.href;
+                const isActive = pathname === link.href;
+
+                return (
+                    <Link
+                        key={link.href}
+                        href={link.href}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            onItemClick(link.href);
+                        }}
+                        onMouseEnter={() => setHoveredLink(link.href)}
+                        onMouseLeave={() => setHoveredLink(null)}
+                        className="nav-stagger-item group flex items-center justify-center text-center cursor-pointer focus-visible:outline-none w-full"
+                    >
+                        <AnimatedSplitText
+                            text={link.label}
+                            isHovered={isHovered || isActive}
+                            className="font-pixel-circle text-6xl lg:text-5xl xl:text-7xl tracking-wider text-center"
+                            colorTop={isActive ? "text-primary-500" : "text-ink-300"}
+                            colorBottom="text-primary-500"
+                        />
+                    </Link>
+                );
+            })}
+        </nav>
+    );
+}
+
+/* -------------------------------------------------------------------------- */
+/* Sub-Component: Social Profiles Footer                                      */
+/* -------------------------------------------------------------------------- */
+interface SocialFooterProps {
+    hoveredSocial: string | null;
+    setHoveredSocial: (label: string | null) => void;
+}
+
+function SocialFooter({ hoveredSocial, setHoveredSocial }: SocialFooterProps) {
+    return (
+        <div className="nav-stagger-item flex flex-col items-center justify-center gap-3 w-full text-center">
+            <span className="text-sm sm:text-base uppercase tracking-widest text-ink-500 font-mono text-center">
+                Social Profiles
+            </span>
+            <ul className="flex flex-row items-center justify-center gap-6 sm:gap-8 whitespace-nowrap">
+                {SOCIALS.map(({ label, href }) => {
+                    const isHovered = hoveredSocial === label;
+
+                    return (
+                        <li key={label} className="inline-flex items-center">
+                            <a
+                                href={href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onMouseEnter={() => setHoveredSocial(label)}
+                                onMouseLeave={() => setHoveredSocial(null)}
+                                className="group inline-flex items-center gap-2 text-sm lg:text-base text-ink-300/80 hover:text-primary-500 transition-colors py-0.5"
+                            >
+                                <AnimatedSplitText
+                                    text={label}
+                                    isHovered={isHovered}
+                                    className="font-mono text-sm lg:text-base tracking-wide"
+                                    colorTop="text-ink-300/80"
+                                    colorBottom="text-primary-500"
+                                />
+                                <ArrowUpRight
+                                    className={`w-4 h-4 transition-transform duration-300 ease-out ${isHovered
+                                        ? "text-primary-500 translate-x-0.5 -translate-y-0.5 opacity-100"
+                                        : "text-ink-300 opacity-60"
+                                        }`}
+                                />
+                            </a>
+                        </li>
+                    );
+                })}
+            </ul>
+        </div>
+    );
+}
+
+/* -------------------------------------------------------------------------- */
+/* Main Component: MenuOverlay                                                */
+/* -------------------------------------------------------------------------- */
 export function MenuOverlay({ isOpen, onClose, onNavigate }: MenuOverlayProps) {
     const pathname = usePathname();
     const { navigateTo } = usePageTransition();
-    const [copied, setCopied] = useState(false);
     const [hoveredLink, setHoveredLink] = useState<string | null>(null);
     const [hoveredSocial, setHoveredSocial] = useState<string | null>(null);
 
@@ -42,6 +145,12 @@ export function MenuOverlay({ isOpen, onClose, onNavigate }: MenuOverlayProps) {
     const contentRef = useRef<HTMLDivElement>(null);
     const pathRef = useRef<SVGPathElement>(null);
     const timelineRef = useRef<gsap.core.Timeline | null>(null);
+
+    const handleNavigate = (href: string) => {
+        onClose();
+        if (onNavigate) onNavigate(href);
+        navigateTo(href);
+    };
 
     useEffect(() => {
         if (!overlayRef.current || !pathRef.current) return;
@@ -143,12 +252,6 @@ export function MenuOverlay({ isOpen, onClose, onNavigate }: MenuOverlayProps) {
         }
     }, [isOpen]);
 
-    const copyEmail = () => {
-        navigator.clipboard.writeText(EMAIL);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-    };
-
     return (
         <div
             id="navigation-overlay"
@@ -156,6 +259,7 @@ export function MenuOverlay({ isOpen, onClose, onNavigate }: MenuOverlayProps) {
             aria-hidden={!isOpen}
             className="fixed inset-0 z-40 hidden flex-col items-center justify-center pointer-events-none"
         >
+            {/* SVG Morphing Canvas */}
             <svg
                 className="absolute inset-0 w-full h-full pointer-events-none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -168,112 +272,30 @@ export function MenuOverlay({ isOpen, onClose, onNavigate }: MenuOverlayProps) {
                 />
             </svg>
 
-            {/* Menu Content Container */}
+            {/* Menu 2-Column Grid Layout */}
             <div
                 ref={contentRef}
-                className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-24 w-full max-w-[1920px] mx-auto px-2 sm:px-4 md:px-8 lg:px-12 xl:px-16 2xl:px-20 items-center"
+                className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-0 w-full max-w-[1920px] mx-auto px-2 sm:px-4 md:px-8 lg:px-12 xl:px-16 2xl:px-20 min-h-[70vh] md:min-h-[75vh] py-8"
             >
-                {/* Primary Links */}
-                <nav aria-label="Main Navigation" className="flex flex-col gap-6 md:gap-8 items-start text-left">
-                    {NAV_LINKS.map((link) => {
-                        const isHovered = hoveredLink === link.href;
-                        const isActive = pathname === link.href;
+                {/* Column 1: Left Spacer (Desktop Only) */}
+                <div className="hidden md:block" aria-hidden="true" />
 
-                        return (
-                            <Link
-                                key={link.href}
-                                href={link.href}
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    onClose();
-                                    if (onNavigate) onNavigate(link.href);
-                                    navigateTo(link.href);
-                                }}
-                                onMouseEnter={() => setHoveredLink(link.href)}
-                                onMouseLeave={() => setHoveredLink(null)}
-                                className="nav-stagger-item group flex items-baseline gap-4 md:gap-6 text-left cursor-pointer focus-visible:outline-none"
-                            >
-                                <span className="font-pixel-circle text-sm sm:text-base leading-none select-none tracking-widest">
-                                    {link.num}
-                                </span>
+                {/* Column 2: Navigation Links (Vertically Centered) & Social Profiles (Bottom) */}
+                <div className="flex flex-col justify-between items-center h-full min-h-[80vh] md:min-h-[90vh] gap-12 md:gap-16 w-full md:w-fit md:ml-auto pr-0 md:pr-10 lg:pr-45">
+                    <NavigationList
+                        pathname={pathname}
+                        hoveredLink={hoveredLink}
+                        setHoveredLink={setHoveredLink}
+                        onItemClick={handleNavigate}
+                    />
 
-                                <AnimatedSplitText
-                                    text={link.label}
-                                    isHovered={isHovered || isActive}
-                                    className="font-pixel-circle text-3xl sm:text-4xl lg:text-6xl tracking-wider"
-                                    colorTop={isActive ? "text-primary-500" : "text-ink-300"}
-                                    colorBottom="text-primary-500"
-                                />
-                            </Link>
-                        );
-                    })}
-                </nav>
-
-                {/* Contact Info & Socials */}
-                <div className="flex flex-col gap-8 items-start justify-center text-ink-300">
-                    <div className="nav-stagger-item flex flex-col gap-2">
-                        <span className="text-sm sm:text-base uppercase tracking-widest text-ink-500 font-mono">
-                            Get In Touch
-                        </span>
-                        <div className="flex items-center gap-3">
-                            <a
-                                href={`mailto:${EMAIL}`}
-                                className="text-sm sm:text-base text-primary-500 hover:text-ink-300 font-medium transition-colors border-b border-primary-500/40 pb-0.5"
-                            >
-                                {EMAIL}
-                            </a>
-                            <Magnetic strength={0.3}>
-                                <button
-                                    type="button"
-                                    onClick={copyEmail}
-                                    aria-label="Copy email address"
-                                    className="p-2 rounded-sm bg-[#f2f2f2] hover:bg-[#f2f2f2]/80 text-ink-300 transition-colors cursor-pointer"
-                                >
-                                    {copied ? (
-                                        <Check className="w-4 h-4 text-primary-500" />
-                                    ) : (
-                                        <Copy className="w-4 h-4" />
-                                    )}
-                                </button>
-                            </Magnetic>
-                        </div>
-                    </div>
-
-                    <div className="nav-stagger-item flex flex-col gap-3">
-                        <span className="text-sm sm:text-base uppercase tracking-widest text-ink-500 font-mono">
-                            Social Profiles
-                        </span>
-                        <ul className="flex flex-col gap-3">
-                            {SOCIALS.map(({ label, href }) => {
-                                const isHovered = hoveredSocial === label;
-
-                                return (
-                                    <li key={label}>
-                                        <a
-                                            href={href}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            onMouseEnter={() => setHoveredSocial(label)}
-                                            onMouseLeave={() => setHoveredSocial(null)}
-                                            className="group inline-flex items-center gap-2 text-sm sm:text-base text-ink-300/80 hover:text-primary-500 transition-colors py-0.5"
-                                        >
-                                            <AnimatedSplitText
-                                                text={label}
-                                                isHovered={isHovered}
-                                                className="font-mono text-sm sm:text-base tracking-wide"
-                                                colorTop="text-ink-300/80"
-                                                colorBottom="text-primary-500"
-                                            />
-                                            <ArrowUpRight className={`w-4 h-4 transition-transform duration-300 ease-out ${isHovered ? "text-primary-500 translate-x-0.5 -translate-y-0.5 opacity-100" : "text-ink-300 opacity-60"
-                                                }`} />
-                                        </a>
-                                    </li>
-                                );
-                            })}
-                        </ul>
-                    </div>
+                    <SocialFooter
+                        hoveredSocial={hoveredSocial}
+                        setHoveredSocial={setHoveredSocial}
+                    />
                 </div>
             </div>
         </div>
     );
 }
+

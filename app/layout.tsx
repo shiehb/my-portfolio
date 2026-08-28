@@ -5,6 +5,7 @@ import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { PageTransitionProvider } from "@/components/ui/PageTransition";
 import DotLens from "@/components/ui/DotLens";
+import { BackgroundGrid } from "@/components/ui/BackgroundGrid";
 import { geistMono, geistPixel } from "./fonts";
 
 const BASE_URL = "https://jerichourbano.com";
@@ -129,6 +130,8 @@ export default function RootLayout({
             hover={20}
           />
         </div>
+        {/* Subtle Guide Column Overlay (4 cols desktop, 2 cols mobile) */}
+        <BackgroundGrid />
         <div className="relative z-10 w-full">
           <PageTransitionProvider>
             <SmoothScroll />

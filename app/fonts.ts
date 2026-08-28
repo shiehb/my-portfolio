@@ -9,5 +9,6 @@ export const geistPixel = Geist_Pixel({
     axes: ["ELSH"],
     variable: "--font-geist-pixel",
     display: "swap",
+    fallback: ["monospace"],
     adjustFontFallback: false,
 });

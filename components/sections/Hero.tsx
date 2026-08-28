@@ -179,7 +179,7 @@ export function Hero() {
                 {/* Line 2: A WEBFLOW DEVELOPER / DESIGNER */}
                 <div
                     ref={line2Ref}
-                    className="hero-line flex flex-wrap items-center justify-center gap-x-2 sm:gap-x-3 md:gap-x-4 font-pixel-circle text-3xl sm:text-4xl lg:text-6xl text-ink-300 tracking-wider normal-case select-none will-change-transform leading-[1.15] text-center"
+                    className="hero-line flex flex-wrap items-center justify-center gap-x-2 sm:gap-x-4 font-pixel-circle text-3xl sm:text-4xl lg:text-6xl text-ink-300 tracking-wider normal-case select-none will-change-transform leading-[1.15] text-center"
                 >
                     <span className="whitespace-nowrap">a Webflow</span>
                     <span
@@ -232,10 +232,10 @@ export function Hero() {
             {/* 3rd Row: Description and Actions at the top center of Row 3 */}
             <div
                 ref={bottomRowRef}
-                className="relative z-10 w-full flex flex-col items-center justify-start gap-4 sm:gap-8 lg:gap-12 py-2 sm:py-4 md:py-6 text-center will-change-transform"
+                className="relative z-10 w-full flex flex-col items-center justify-start gap-2 sm:gap-4 md:gap-6 text-center will-change-transform"
             >
                 {/* Center Description */}
-                <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-ink-500 max-w-6xl tracking-[0.01em] leading-[1.15] text-center">
+                <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted max-w-6xl px-4 sm:px-6 pt-4 tracking-[0.01em] leading-[1.15] text-center">
                     Designing and developing visually stunning, technically proficient websites tailored to client needs.
                 </p>
 
@@ -249,7 +249,7 @@ export function Hero() {
                         }}
                         onMouseEnter={() => setIsHoveredTalk(true)}
                         onMouseLeave={() => setIsHoveredTalk(false)}
-                        className="relative group inline-flex items-center justify-center px-6 py-2.5 sm:px-7 sm:py-3 bg-canvas rounded-none text-ink-300 hover:text-primary-500 transition-colors uppercase cursor-pointer select-none"
+                        className="relative group inline-flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-4 bg-canvas rounded-none text-ink-300 hover:text-primary-500 transition-colors uppercase cursor-pointer select-none"
                     >
                         {/* Extended crosshair borders forming plus corners */}
                         <span aria-hidden="true" className="absolute -left-2 -right-2 top-0 border-t border-black pointer-events-none" />
@@ -271,7 +271,7 @@ export function Hero() {
                     </Link>
                 </div>
             </div>
-        </section>
+        </section >
     );
 }
 

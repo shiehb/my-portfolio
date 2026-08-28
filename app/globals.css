@@ -21,13 +21,14 @@
   --color-ink-50: #171717;
   --color-ink-100: #171717;
   --color-ink-300: #171717;
-  --color-ink-500: #3b3b3b;
+  --color-ink-500: #595959;
 
   /* Direct semantic color utilities (bg-canvas, bg-surface, text-light, text-muted, text-accent) */
   --color-canvas: #f2f2f2;
   --color-surface: #c9c9c9;
   --color-text-main: #171717;
-  --color-text-muted: #3b3b3b;
+  --color-text-muted: #595959;
+  --color-muted: #595959;
   --color-accent: #ff4d00;
 
   /* ---- Radii ---- */
