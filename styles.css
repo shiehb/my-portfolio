@@ -20,6 +20,9 @@
   --bg-secondary: #efefef;                 /* Customized Surface BG */
   --bg-canvas: #000000;
   --bg-surface: #efefef;
+  --bg-transition: var(--color-accent-primary); /* Signature Accent Page Transition */
+  --bg-curve-transition: var(--color-accent-primary);
+  --bg-menu-overlay: var(--color-accent-primary); /* Signature Accent Menu Overlay */
   --bg-accent-primary: var(--color-accent-primary);
   --bg-accent-secondary: var(--color-accent-secondary);
   --bg-accent-tertiary: var(--color-accent-tertiary);

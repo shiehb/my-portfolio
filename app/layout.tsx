@@ -126,8 +126,8 @@ export default function RootLayout({
             dotSize={20}
             reach={20}
             minSize={8}
-            speed={60}
-            hover={20}
+            speed={100}
+            hover={60}
           />
         </div>
         {/* Subtle Guide Column Overlay (4 cols desktop, 2 cols mobile) */}

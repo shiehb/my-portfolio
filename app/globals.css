@@ -36,9 +36,9 @@
   --bg-secondary: #efefef;
   --bg-surface: #efefef;
   --bg-card: #efefef;
-  --bg-transition: #efefef;
-  --bg-menu-overlay: #efefef;
-  --bg-curve-transition: #efefef;
+  --bg-transition: #ff4d00;
+  --bg-menu-overlay: #ff4d00;
+  --bg-curve-transition: #ff4d00;
   --bg-inverse: #efefef;
   --bg-accent-primary: #ff4d00;
 
@@ -125,9 +125,9 @@
   --bg-secondary: #efefef;
   --bg-surface: #efefef;
   --bg-card: #efefef;
-  --bg-transition: #efefef;
-  --bg-menu-overlay: #efefef;
-  --bg-curve-transition: #efefef;
+  --bg-transition: #ff4d00;
+  --bg-menu-overlay: #ff4d00;
+  --bg-curve-transition: #ff4d00;
   --bg-inverse: #efefef;
   --bg-accent-primary: #ff4d00;
 

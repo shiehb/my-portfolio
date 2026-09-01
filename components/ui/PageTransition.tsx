@@ -17,7 +17,7 @@ const PageTransitionContext = createContext<PageTransitionContextType>({
 
 export const usePageTransition = () => useContext(PageTransitionContext);
 
-const TRANSITION_BG_COLOR = "var(--bg-transition, #efefef)"; // Minimal surface transition background
+const TRANSITION_BG_COLOR = "var(--bg-transition, #ff4d00)"; // Signature Accent (#ff4d00) transition background
 
 const ROUTE_LABELS: Record<string, string> = {
     "/": "HOME",

@@ -73,8 +73,8 @@ function NavigationList({ pathname, hoveredLink, setHoveredLink, onItemClick }: 
                             text={link.label}
                             isHovered={isHovered || isActive}
                             className="font-sans font-medium text-4xl sm:text-5xl lg:text-6xl xl:text-7xl tracking-tight text-center"
-                            colorTop={isActive ? "text-[var(--color-accent-primary)]" : "text-[#000000]"}
-                            colorBottom="text-[var(--color-accent-primary)]"
+                            colorTop={isActive ? "text-[#ffffff]" : "text-[#000000]"}
+                            colorBottom="text-[#ffffff]"
                         />
                     </Link>
                 );
@@ -94,7 +94,7 @@ interface SocialFooterProps {
 function SocialFooter({ hoveredSocial, setHoveredSocial }: SocialFooterProps) {
     return (
         <div className="nav-stagger-item flex flex-col items-center justify-center gap-3 w-full text-center">
-            <span className="text-xs sm:text-sm uppercase tracking-widest text-[#b0b0b0] font-medium text-center">
+            <span className="text-xs sm:text-sm uppercase tracking-widest text-[#000000]/60 font-semibold text-center">
                 Social Profiles
             </span>
             <ul className="flex flex-row items-center justify-center gap-6 sm:gap-8 whitespace-nowrap">
@@ -109,19 +109,19 @@ function SocialFooter({ hoveredSocial, setHoveredSocial }: SocialFooterProps) {
                                 rel="noopener noreferrer"
                                 onMouseEnter={() => setHoveredSocial(label)}
                                 onMouseLeave={() => setHoveredSocial(null)}
-                                className="group inline-flex items-center gap-2 text-sm lg:text-base text-[#000000] hover:text-[var(--color-accent-primary)] transition-colors py-0.5"
+                                className="group inline-flex items-center gap-2 text-sm lg:text-base text-[#000000] hover:text-[#ffffff] transition-colors py-0.5"
                             >
                                 <AnimatedSplitText
                                     text={label}
                                     isHovered={isHovered}
                                     className="font-sans text-sm lg:text-base font-medium tracking-wide"
                                     colorTop="text-[#000000]"
-                                    colorBottom="text-[var(--color-accent-primary)]"
+                                    colorBottom="text-[#ffffff]"
                                 />
                                 <ArrowUpRight
                                     className={`w-4 h-4 transition-transform duration-300 ease-out ${isHovered
-                                        ? "text-[var(--color-accent-primary)] translate-x-0.5 -translate-y-0.5 opacity-100"
-                                        : "text-[#000000] opacity-70"
+                                        ? "text-[#ffffff] translate-x-0.5 -translate-y-0.5 opacity-100"
+                                        : "text-[#000000] opacity-80"
                                         }`}
                                 />
                             </a>
@@ -296,7 +296,7 @@ export function MenuOverlay({ isOpen, onClose, onNavigate }: MenuOverlayProps) {
             >
                 <path
                     ref={pathRef}
-                    fill="var(--bg-menu-overlay, #efefef)"
+                    fill="var(--bg-menu-overlay, #ff4d00)"
                     d="M0 0 L1000 0 L1000 0 Q500 0 0 0 Z"
                 />
             </svg>

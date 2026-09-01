@@ -184,7 +184,7 @@ export function Hero() {
                     <span className="whitespace-nowrap">a Webflow</span>
                     <span
                         aria-label="Developer and Designer"
-                        className="relative inline-flex items-center overflow-hidden h-[1.15em] min-w-[9ch] pr-2 text-[var(--color-accent-primary)] leading-none text-left normal-case"
+                        className="relative inline-flex items-center overflow-hidden h-[1.15em] min-w-[7ch] text-[var(--color-accent-primary)] leading-none text-left normal-case"
                     >
                         {/* Word 0: DEVELOPER */}
                         <span
@@ -206,7 +206,7 @@ export function Hero() {
                         <span
                             ref={word1Ref}
                             aria-hidden="true"
-                            className="absolute inset-0 flex items-center whitespace-nowrap tracking-tight leading-none normal-case"
+                            className="absolute inset-0 flex items-center whitespace-nowrap tracking-[.06em] leading-none normal-case"
                         >
                             {ROLES[1].split("").map((char, i) => (
                                 <span

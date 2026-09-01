@@ -144,7 +144,11 @@ export function Navbar({ onNavigate }: NavbarProps) {
                   aria-expanded={isOpen}
                   aria-controls="navigation-overlay"
                   aria-label={isOpen ? "Close menu" : "Open menu"}
-                  className="p-2 md:p-3 rounded-full border-none bg-transparent text-[var(--text-primary)] hover:text-[var(--color-accent-primary)] transition-colors cursor-pointer focus-visible:outline-none"
+                  className={`p-2 md:p-3 rounded-full border-none bg-transparent transition-colors cursor-pointer focus-visible:outline-none ${
+                    isOpen
+                      ? "text-[#000000] hover:text-[#ffffff]"
+                      : "text-[var(--color-neutral-primary)] hover:text-[var(--color-accent-primary)]"
+                  }`}
                 >
                   <AnimatedMenuIcon isOpen={isOpen} />
                 </button>
