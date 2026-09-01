@@ -17,7 +17,7 @@ const PageTransitionContext = createContext<PageTransitionContextType>({
 
 export const usePageTransition = () => useContext(PageTransitionContext);
 
-const TRANSITION_BG_COLOR = "#c9c9c9"; // Synchronized with menu overlay surface color
+const TRANSITION_BG_COLOR = "#121826"; // Synchronized with menu overlay dark charcoal surface color
 
 const ROUTE_LABELS: Record<string, string> = {
     "/": "HOME",
@@ -230,12 +230,12 @@ export function PageTransitionProvider({ children }: { children: React.ReactNode
                     />
                 </svg>
 
-                {/* Center Transition Text in Pixel Curve Typography */}
+                {/* Center Transition Text in Geist Typography */}
                 <div
                     ref={textRef}
                     className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-10 px-4 text-center"
                 >
-                    <h2 className="font-pixel-circle text-6xl lg:text-5xl xl:text-7xl tracking-wider text-center text-ink-300 select-none">
+                    <h2 className="font-sans font-medium text-4xl sm:text-5xl lg:text-6xl xl:text-7xl tracking-tight text-center text-[var(--text-inverse-primary)] select-none">
                         {transitionText}
                     </h2>
                 </div>

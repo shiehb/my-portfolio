@@ -72,9 +72,9 @@ function NavigationList({ pathname, hoveredLink, setHoveredLink, onItemClick }: 
                         <AnimatedSplitText
                             text={link.label}
                             isHovered={isHovered || isActive}
-                            className="font-pixel-circle text-6xl lg:text-5xl xl:text-7xl tracking-wider text-center"
-                            colorTop={isActive ? "text-primary-500" : "text-ink-300"}
-                            colorBottom="text-primary-500"
+                            className="font-sans font-medium text-4xl sm:text-5xl lg:text-6xl xl:text-7xl tracking-tight text-center"
+                            colorTop={isActive ? "text-[var(--color-accent-primary)]" : "text-[var(--text-inverse-primary)]"}
+                            colorBottom="text-[var(--color-accent-primary)]"
                         />
                     </Link>
                 );
@@ -94,7 +94,7 @@ interface SocialFooterProps {
 function SocialFooter({ hoveredSocial, setHoveredSocial }: SocialFooterProps) {
     return (
         <div className="nav-stagger-item flex flex-col items-center justify-center gap-3 w-full text-center">
-            <span className="text-sm sm:text-base uppercase tracking-widest text-ink-500 font-mono text-center">
+            <span className="text-xs sm:text-sm uppercase tracking-widest text-[var(--text-inverse-secondary)] font-medium text-center">
                 Social Profiles
             </span>
             <ul className="flex flex-row items-center justify-center gap-6 sm:gap-8 whitespace-nowrap">
@@ -109,19 +109,19 @@ function SocialFooter({ hoveredSocial, setHoveredSocial }: SocialFooterProps) {
                                 rel="noopener noreferrer"
                                 onMouseEnter={() => setHoveredSocial(label)}
                                 onMouseLeave={() => setHoveredSocial(null)}
-                                className="group inline-flex items-center gap-2 text-sm lg:text-base text-ink-300/80 hover:text-primary-500 transition-colors py-0.5"
+                                className="group inline-flex items-center gap-2 text-sm lg:text-base text-[var(--text-inverse-secondary)] hover:text-[var(--color-accent-primary)] transition-colors py-0.5"
                             >
                                 <AnimatedSplitText
                                     text={label}
                                     isHovered={isHovered}
-                                    className="font-mono text-sm lg:text-base tracking-wide"
-                                    colorTop="text-ink-300/80"
-                                    colorBottom="text-primary-500"
+                                    className="font-sans text-sm lg:text-base font-medium tracking-wide"
+                                    colorTop="text-[var(--text-inverse-secondary)]"
+                                    colorBottom="text-[var(--color-accent-primary)]"
                                 />
                                 <ArrowUpRight
                                     className={`w-4 h-4 transition-transform duration-300 ease-out ${isHovered
-                                        ? "text-primary-500 translate-x-0.5 -translate-y-0.5 opacity-100"
-                                        : "text-ink-300 opacity-60"
+                                        ? "text-[var(--color-accent-primary)] translate-x-0.5 -translate-y-0.5 opacity-100"
+                                        : "text-[var(--text-inverse-secondary)] opacity-70"
                                         }`}
                                 />
                             </a>
@@ -277,7 +277,7 @@ export function MenuOverlay({ isOpen, onClose, onNavigate }: MenuOverlayProps) {
             >
                 <path
                     ref={pathRef}
-                    fill="#c9c9c9"
+                    fill="#121826"
                     d="M0 0 L1000 0 L1000 0 Q500 0 0 0 Z"
                 />
             </svg>

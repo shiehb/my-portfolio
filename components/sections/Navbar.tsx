@@ -78,8 +78,8 @@ export function Navbar({ onNavigate }: NavbarProps) {
                         <nav
                             aria-label="Header Navigation"
                             className={`hidden md:flex items-center gap-5 lg:gap-8 transition-opacity duration-500 ease-in-out ${showNavLinks
-                                    ? "opacity-100 pointer-events-auto"
-                                    : "opacity-0 pointer-events-none"
+                                ? "opacity-100 pointer-events-auto"
+                                : "opacity-0 pointer-events-none"
                                 }`}
                         >
                             {NAVBAR_LINKS.map((item) => {
@@ -97,15 +97,15 @@ export function Navbar({ onNavigate }: NavbarProps) {
                                         }}
                                         onMouseEnter={() => setHoveredNav(item.href)}
                                         onMouseLeave={() => setHoveredNav(null)}
-                                        className="group relative inline-flex items-center py-2 px-1 text-ink-300 hover:text-primary-500 transition-colors uppercase cursor-pointer focus-visible:outline-none"
+                                        className="group relative inline-flex items-center py-2 px-1 text-[var(--text-primary)] hover:text-[var(--color-accent-primary)] transition-colors uppercase cursor-pointer focus-visible:outline-none"
                                         aria-label={item.label}
                                     >
                                         <AnimatedSplitText
                                             text={item.label}
                                             isHovered={isHovered || isActive}
-                                            className="font-mono text-xs sm:text-sm md:text-base tracking-widest font-medium pointer-events-none"
-                                            colorTop={isActive ? "text-primary-500" : "text-ink-300"}
-                                            colorBottom="text-primary-500"
+                                            className="font-sans text-xs sm:text-sm md:text-base tracking-widest font-medium pointer-events-none"
+                                            colorTop={isActive ? "text-[var(--color-accent-primary)]" : "text-[var(--text-primary)]"}
+                                            colorBottom="text-[var(--color-accent-primary)]"
                                         />
                                     </Link>
                                 );
@@ -115,8 +115,8 @@ export function Navbar({ onNavigate }: NavbarProps) {
                         {/* Menu Toggle Button - Ultra smooth opacity fade */}
                         <div
                             className={`transition-opacity duration-500 ease-in-out ${showMenuButton
-                                    ? "opacity-100 pointer-events-auto"
-                                    : "opacity-100 pointer-events-auto md:opacity-0 md:pointer-events-none"
+                                ? "opacity-100 pointer-events-auto"
+                                : "opacity-100 pointer-events-auto md:opacity-0 md:pointer-events-none"
                                 }`}
                         >
                             <Magnetic strength={0.4}>
@@ -126,7 +126,7 @@ export function Navbar({ onNavigate }: NavbarProps) {
                                     aria-expanded={isOpen}
                                     aria-controls="navigation-overlay"
                                     aria-label={isOpen ? "Close menu" : "Open menu"}
-                                    className="p-2 md:p-3 rounded-pill border-none bg-transparent text-ink-50 hover:text-primary-500 transition-colors cursor-pointer focus-visible:outline-none"
+                                    className="p-2 md:p-3 rounded-full border-none bg-transparent text-[var(--text-primary)] hover:text-[var(--color-accent-primary)] transition-colors cursor-pointer focus-visible:outline-none"
                                 >
                                     <AnimatedMenuIcon isOpen={isOpen} />
                                 </button>

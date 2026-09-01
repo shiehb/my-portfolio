@@ -1,0 +1,672 @@
+/* ==========================================================================
+   PORTFOLIO DESIGN SYSTEM TOKENS & STYLES (styles.css)
+   Refined Dark Charcoal Palette, Crisp White Contrast, Soft Gray-White Base
+   ========================================================================== */
+
+:root {
+  /* Core Palette Defaults */
+  --color-neutral-primary: #121826;        /* Dark Charcoal (Not Pitch Black) */
+  --color-neutral-secondary: #333e52;      /* Deep Slate Charcoal */
+  --color-neutral-inverse: #ffffff;        /* Pure White */
+  --color-accent-primary: #2563eb;        /* Royal Blue Accent */
+  --color-accent-primary-hover: #1d4ed8;
+  --color-accent-secondary: #7c3aed;      /* Violet Accent */
+  --color-accent-secondary-hover: #6d28d9;
+  --color-accent-tertiary: #059669;       /* Emerald Accent */
+  --color-accent-tertiary-hover: #047857;
+
+  /* Tint Scales (A90 to A10) */
+  --color-neutral-primary-a90: #1a2234;
+  --color-neutral-primary-a80: #253046;
+  --color-neutral-primary-a50: #64748b;
+  --color-neutral-primary-a20: #e2e8f0;
+  --color-neutral-primary-a10: #f8fafc;   /* Soft Gray-White */
+
+  /* Applied Contextual Variables */
+  --bg-primary: #ffffff;                   /* Main White Canvas */
+  --bg-secondary: #f8fafc;                 /* Slight Gray-White Accent Canvas */
+  --bg-accent-primary: var(--color-accent-primary);
+  --bg-accent-secondary: var(--color-accent-secondary);
+  --bg-accent-tertiary: var(--color-accent-tertiary);
+  --bg-inverse: var(--color-neutral-primary); /* Charcoal Backgrounds */
+
+  /* Text Colors */
+  --text-primary: var(--color-neutral-primary); /* Dark Charcoal Text */
+  --text-secondary: #475569;                /* Slate Gray Text */
+  --text-inverse-primary: #ffffff;           /* White Text on Charcoal */
+  --text-inverse-secondary: #cbd5e1;         /* Soft Light Gray Text */
+  --text-accent-primary: var(--color-accent-primary);
+
+  /* Border Colors */
+  --border-primary: #e2e8f0;                /* Light Gray Border */
+  --border-secondary: #cbd5e1;              /* Medium Gray Border */
+  --border-accent: var(--color-accent-primary);
+  --border-inverse-primary: #253046;        /* Charcoal Border */
+  --border-inverse-secondary: #333e52;
+
+  /* Border Radius & Rem Spacing Scale */
+  --radius-sm: 0.125rem; 
+  --radius-md: 0.375rem; 
+  --radius-lg: 0.5rem; 
+  --radius-xl: 0.75rem; 
+  --radius-round: 9999px;
+
+  --space-0-25x: 0.25rem; 
+  --space-0-5x: 0.5rem; 
+  --space-0-75x: 0.75rem; 
+  --space-1x: 1rem;
+  --space-1-25x: 1.25rem; 
+  --space-1-5x: 1.5rem; 
+  --space-1-75x: 1.75rem; 
+  --space-2x: 2rem;
+  --space-3x: 3rem; 
+  --space-4x: 4rem; 
+  --space-5x: 5rem; 
+  --space-6x: 6rem; 
+  --space-7x: 7rem; 
+  --space-8x: 8rem;
+
+  /* Typography Scale Constants (Major Thirds: 1.25 Ratio from 1rem base) */
+  --font-size-base: 1rem;
+  --font-size-h6: 1.25rem;
+  --font-size-h5: 1.5625rem;
+  --font-size-h4: 1.953rem;
+  --font-size-h3: 2.441rem;
+  --font-size-h2: 3.052rem;
+  --font-size-h1: 3.815rem;
+
+  /* Line Heights in em units */
+  --line-height-p: 1.5em;
+  --line-height-h6: 1.4em;
+  --line-height-h5: 1.3em;
+  --line-height-h4: 1.2em;
+  --line-height-h3: 1.15em;
+  --line-height-h2: 1.1em;
+  --line-height-h1: 1.0em;
+
+  /* Letter Spacing */
+  --letter-spacing-p: 0;
+  --letter-spacing-h6: -0.005em;   /* -0.5% */
+  --letter-spacing-h5: -0.008em;   /* -0.8% */
+  --letter-spacing-h4: -0.01em;    /* -1.0% */
+  --letter-spacing-h3: -0.015em;   /* -1.5% */
+  --letter-spacing-h2: -0.018em;   /* -1.8% */
+  --letter-spacing-h1: -0.02em;    /* -2.0% */
+
+  /* Standard transitions */
+  --transition-fast: 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-base: 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   1. BASE LAYER (@layer base)
+   ========================================================================== */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    border-color: var(--border-primary);
+  }
+
+  html {
+    font-size: 100%;
+    scroll-behavior: smooth;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+  }
+
+  body {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-p);
+    letter-spacing: var(--letter-spacing-p);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+  }
+
+  ::selection {
+    background-color: var(--color-accent-primary);
+    color: var(--color-neutral-inverse);
+  }
+
+  /* Typography Scale Elements */
+  h1 {
+    font-size: var(--font-size-h1);
+    line-height: var(--line-height-h1);
+    letter-spacing: var(--letter-spacing-h1);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-top: 0;
+    margin-bottom: var(--space-1x);
+  }
+
+  h2 {
+    font-size: var(--font-size-h2);
+    line-height: var(--line-height-h2);
+    letter-spacing: var(--letter-spacing-h2);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-top: 0;
+    margin-bottom: var(--space-0-75x);
+  }
+
+  h3 {
+    font-size: var(--font-size-h3);
+    line-height: var(--line-height-h3);
+    letter-spacing: var(--letter-spacing-h3);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-top: 0;
+    margin-bottom: var(--space-0-75x);
+  }
+
+  h4 {
+    font-size: var(--font-size-h4);
+    line-height: var(--line-height-h4);
+    letter-spacing: var(--letter-spacing-h4);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-top: 0;
+    margin-bottom: var(--space-0-5x);
+  }
+
+  h5 {
+    font-size: var(--font-size-h5);
+    line-height: var(--line-height-h5);
+    letter-spacing: var(--letter-spacing-h5);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-top: 0;
+    margin-bottom: var(--space-0-5x);
+  }
+
+  h6 {
+    font-size: var(--font-size-h6);
+    line-height: var(--line-height-h6);
+    letter-spacing: var(--letter-spacing-h6);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-top: 0;
+    margin-bottom: var(--space-0-5x);
+  }
+
+  p {
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-p);
+    letter-spacing: var(--letter-spacing-p);
+    color: var(--text-secondary);
+    margin-top: 0;
+    margin-bottom: var(--space-1x);
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent-primary);
+    outline-offset: 2px;
+  }
+}
+
+/* ==========================================================================
+   2. COMPONENT LAYER (@layer components)
+   ========================================================================== */
+@layer components {
+  /* ---- Section Containers ---- */
+  .c-section {
+    width: 100%;
+    position: relative;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 20vh;    /* Mobile default (240px - 767px) */
+    padding-bottom: 20vh;
+  }
+
+  @media (min-width: 768px) and (max-width: 991px) {
+    .c-section {
+      padding-top: 15vh;  /* Tablet (768px - 991px) */
+      padding-bottom: 15vh;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .c-section {
+      padding-top: 10vh;  /* Desktop (992px and above) */
+      padding-bottom: 10vh;
+    }
+  }
+
+  .c-section.is-inverse {
+    background-color: var(--bg-inverse);
+    color: var(--text-inverse-primary);
+  }
+
+  .c-section.is-secondary {
+    background-color: var(--bg-secondary);
+  }
+
+  .c-section.is-white {
+    background-color: var(--bg-primary);
+  }
+
+  /* ---- Heading Component (.c-heading) ---- */
+  .c-heading {
+    color: var(--text-primary);
+    margin-top: 0;
+    margin-bottom: var(--space-0-75x);
+  }
+
+  .c-heading.is-1 {
+    font-size: var(--font-size-h1);
+    line-height: var(--line-height-h1);
+    letter-spacing: var(--letter-spacing-h1);
+    font-weight: 700;
+  }
+
+  .c-heading.is-2 {
+    font-size: var(--font-size-h2);
+    line-height: var(--line-height-h2);
+    letter-spacing: var(--letter-spacing-h2);
+    font-weight: 700;
+  }
+
+  .c-heading.is-3 {
+    font-size: var(--font-size-h3);
+    line-height: var(--line-height-h3);
+    letter-spacing: var(--letter-spacing-h3);
+    font-weight: 600;
+  }
+
+  .c-heading.is-4 {
+    font-size: var(--font-size-h4);
+    line-height: var(--line-height-h4);
+    letter-spacing: var(--letter-spacing-h4);
+    font-weight: 600;
+  }
+
+  .c-heading.is-5 {
+    font-size: var(--font-size-h5);
+    line-height: var(--line-height-h5);
+    letter-spacing: var(--letter-spacing-h5);
+    font-weight: 600;
+  }
+
+  .c-heading.is-6 {
+    font-size: var(--font-size-h6);
+    line-height: var(--line-height-h6);
+    letter-spacing: var(--letter-spacing-h6);
+    font-weight: 600;
+  }
+
+  .c-heading.is-inverse {
+    color: var(--text-inverse-primary);
+  }
+
+  .c-heading.is-accent {
+    color: var(--text-accent-primary);
+  }
+
+  /* ---- Button Component (.c-btn) & Combos ---- */
+  .c-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-0-5x);
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.2;
+    padding: var(--space-0-75x) var(--space-1-5x);
+    border-radius: var(--radius-md);
+    border: 1px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all var(--transition-base);
+    background-color: var(--color-neutral-primary);
+    color: var(--color-neutral-inverse);
+    user-select: none;
+    white-space: nowrap;
+  }
+
+  .c-btn:hover:not(:disabled) {
+    background-color: var(--color-neutral-secondary);
+    transform: translateY(-1px);
+  }
+
+  .c-btn:active:not(:disabled) {
+    transform: translateY(1px);
+  }
+
+  .c-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none !important;
+  }
+
+  /* Combo classes for .c-btn */
+  .c-btn.is-secondary {
+    background-color: transparent;
+    color: var(--text-primary);
+    border-color: var(--border-primary);
+  }
+
+  .c-btn.is-secondary:hover:not(:disabled) {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-secondary);
+    color: var(--text-primary);
+  }
+
+  .c-btn.is-white {
+    background-color: var(--color-neutral-inverse);
+    color: var(--color-neutral-primary);
+    border-color: var(--border-primary);
+  }
+
+  .c-btn.is-white:hover:not(:disabled) {
+    background-color: var(--color-neutral-primary-a10);
+    border-color: var(--border-secondary);
+    color: var(--color-neutral-primary);
+  }
+
+  .c-btn.is-light {
+    background-color: var(--color-neutral-primary-a10);
+    color: var(--text-primary);
+    border-color: var(--border-primary);
+  }
+
+  .c-btn.is-light:hover:not(:disabled) {
+    background-color: var(--color-neutral-primary-a20);
+    border-color: var(--border-secondary);
+  }
+
+  .c-btn.is-accent {
+    background-color: var(--color-accent-primary);
+    color: var(--color-neutral-inverse);
+    border-color: var(--color-accent-primary);
+  }
+
+  .c-btn.is-accent:hover:not(:disabled) {
+    background-color: var(--color-accent-primary-hover);
+    border-color: var(--color-accent-primary-hover);
+    box-shadow: 0 0 16px rgba(37, 99, 235, 0.35);
+  }
+
+  .c-btn.is-inverse {
+    background-color: var(--color-neutral-inverse);
+    color: var(--color-neutral-primary);
+    border-color: var(--color-neutral-inverse);
+  }
+
+  .c-btn.is-inverse:hover:not(:disabled) {
+    background-color: var(--color-neutral-primary-a10);
+  }
+
+  .c-btn.has-shadow {
+    box-shadow: 0 4px 14px rgba(18, 24, 38, 0.12);
+  }
+
+  .c-btn.has-shadow:hover:not(:disabled) {
+    box-shadow: 0 6px 20px rgba(18, 24, 38, 0.18);
+  }
+
+  .c-btn.is-round {
+    border-radius: var(--radius-round);
+  }
+
+  /* ---- Card Components (.c-card) ---- */
+  .c-card {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-lg);
+    padding: var(--space-2x);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+  }
+
+  .c-card.is-light {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-primary);
+  }
+
+  .c-card.is-inverse {
+    background-color: var(--bg-inverse);
+    border-color: var(--border-inverse-primary);
+    color: var(--text-inverse-primary);
+  }
+
+  .c-card.has-shadow {
+    box-shadow: 0 4px 12px rgba(18, 24, 38, 0.05), 0 1px 3px rgba(18, 24, 38, 0.04);
+  }
+
+  .c-card.has-shadow:hover {
+    box-shadow: 0 12px 24px rgba(18, 24, 38, 0.08), 0 4px 8px rgba(18, 24, 38, 0.04);
+    transform: translateY(-2px);
+  }
+
+  /* ---- Form Controls ---- */
+  .c-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-0-5x);
+    margin-bottom: var(--space-1-5x);
+    width: 100%;
+  }
+
+  .c-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: 0.02em;
+    user-select: none;
+  }
+
+  .c-label.is-inverse {
+    color: var(--text-inverse-primary);
+  }
+
+  .c-input,
+  .c-textarea,
+  .c-select {
+    width: 100%;
+    font-family: inherit;
+    font-size: 0.9375rem;
+    padding: var(--space-0-75x) var(--space-1x);
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-md);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+  }
+
+  .c-input::placeholder,
+  .c-textarea::placeholder {
+    color: var(--color-neutral-primary-a50);
+  }
+
+  .c-input:focus,
+  .c-textarea:focus,
+  .c-select:focus {
+    outline: none;
+    border-color: var(--color-accent-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  }
+
+  .c-input.is-light,
+  .c-textarea.is-light {
+    background-color: var(--bg-secondary);
+  }
+
+  .c-input.is-inverse,
+  .c-textarea.is-inverse {
+    background-color: var(--color-neutral-primary-a90);
+    border-color: var(--border-inverse-primary);
+    color: var(--text-inverse-primary);
+  }
+
+  .c-input.is-inverse:focus,
+  .c-textarea.is-inverse:focus {
+    border-color: var(--color-accent-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+  }
+
+  .c-textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+}
+
+/* ==========================================================================
+   3. UTILITY LAYER (@layer utilities)
+   ========================================================================== */
+@layer utilities {
+  /* 12-Column Responsive Grid */
+  .u-grid-12 {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--space-1-5x);
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    .u-grid-12 {
+      gap: var(--space-2x);
+    }
+  }
+
+  /* Padding utilities */
+  .u-padding-top-large {
+    padding-top: var(--space-6x);
+  }
+
+  .u-padding-bottom-large {
+    padding-bottom: var(--space-6x);
+  }
+
+  /* Text helpers */
+  .u-text-center {
+    text-align: center;
+  }
+
+  .u-text-left {
+    text-align: left;
+  }
+
+  .u-text-right {
+    text-align: right;
+  }
+
+  .u-all-caps {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Direct CSS Variable Utility Mappings */
+  /* Backgrounds */
+  .u-bg-primary {
+    background-color: var(--bg-primary);
+  }
+
+  .u-bg-secondary {
+    background-color: var(--bg-secondary);
+  }
+
+  .u-bg-inverse {
+    background-color: var(--bg-inverse);
+  }
+
+  .u-bg-accent {
+    background-color: var(--bg-accent-primary);
+  }
+
+  .u-bg-accent-secondary {
+    background-color: var(--bg-accent-secondary);
+  }
+
+  .u-bg-accent-tertiary {
+    background-color: var(--bg-accent-tertiary);
+  }
+
+  .u-bg-a90 {
+    background-color: var(--color-neutral-primary-a90);
+  }
+
+  .u-bg-a80 {
+    background-color: var(--color-neutral-primary-a80);
+  }
+
+  .u-bg-a50 {
+    background-color: var(--color-neutral-primary-a50);
+  }
+
+  .u-bg-a20 {
+    background-color: var(--color-neutral-primary-a20);
+  }
+
+  .u-bg-a10 {
+    background-color: var(--color-neutral-primary-a10);
+  }
+
+  .u-bg-white {
+    background-color: var(--color-neutral-inverse);
+  }
+
+  /* Text */
+  .u-text-primary {
+    color: var(--text-primary);
+  }
+
+  .u-text-secondary {
+    color: var(--text-secondary);
+  }
+
+  .u-text-inverse-primary {
+    color: var(--text-inverse-primary);
+  }
+
+  .u-text-inverse-secondary {
+    color: var(--text-inverse-secondary);
+  }
+
+  .u-text-accent {
+    color: var(--text-accent-primary);
+  }
+
+  .u-text-accent-secondary {
+    color: var(--color-accent-secondary);
+  }
+
+  .u-text-accent-tertiary {
+    color: var(--color-accent-tertiary);
+  }
+
+  /* Borders */
+  .u-border-primary {
+    border-color: var(--border-primary);
+  }
+
+  .u-border-secondary {
+    border-color: var(--border-secondary);
+  }
+
+  .u-border-accent {
+    border-color: var(--border-accent);
+  }
+
+  .u-border-inverse-primary {
+    border-color: var(--border-inverse-primary);
+  }
+
+  .u-border-inverse-secondary {
+    border-color: var(--border-inverse-secondary);
+  }
+}

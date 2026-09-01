@@ -171,7 +171,7 @@ export function Hero() {
                 {/* Line 1: I'M JERICHO URBANO, */}
                 <h1
                     ref={line1Ref}
-                    className="hero-line font-pixel-circle text-3xl sm:text-4xl lg:text-6xl text-ink-300 tracking-wider normal-case select-none will-change-transform whitespace-nowrap leading-[1.15] text-center"
+                    className="hero-line font-sans font-medium text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-[var(--color-neutral-primary)] tracking-tight normal-case select-none will-change-transform whitespace-nowrap leading-[1.1] text-center"
                 >
                     I&apos;m Jericho Urbano,
                 </h1>
@@ -179,12 +179,12 @@ export function Hero() {
                 {/* Line 2: A WEBFLOW DEVELOPER / DESIGNER */}
                 <div
                     ref={line2Ref}
-                    className="hero-line flex flex-wrap items-center justify-center gap-x-2 sm:gap-x-4 font-pixel-circle text-3xl sm:text-4xl lg:text-6xl text-ink-300 tracking-wider normal-case select-none will-change-transform leading-[1.15] text-center"
+                    className="hero-line flex flex-wrap items-center justify-center gap-x-2 sm:gap-x-4 font-sans font-medium text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-[var(--color-neutral-primary)] tracking-tight normal-case select-none will-change-transform leading-[1.1] text-center"
                 >
                     <span className="whitespace-nowrap">a Webflow</span>
                     <span
                         aria-label="Developer and Designer"
-                        className="relative inline-flex items-center overflow-hidden h-[1.15em] min-w-[9ch] pr-2 text-primary-500 leading-none text-left normal-case"
+                        className="relative inline-flex items-center overflow-hidden h-[1.15em] min-w-[9ch] pr-2 text-[var(--color-accent-primary)] leading-none text-left normal-case"
                     >
                         {/* Word 0: DEVELOPER */}
                         <span
@@ -206,7 +206,7 @@ export function Hero() {
                         <span
                             ref={word1Ref}
                             aria-hidden="true"
-                            className="absolute inset-0 flex items-center whitespace-nowrap tracking-[0.11em] leading-none normal-case"
+                            className="absolute inset-0 flex items-center whitespace-nowrap tracking-tight leading-none normal-case"
                         >
                             {ROLES[1].split("").map((char, i) => (
                                 <span
@@ -223,7 +223,7 @@ export function Hero() {
                 {/* Line 3: BASED IN PHILIPPINES. */}
                 <p
                     ref={line3Ref}
-                    className="hero-line font-pixel-circle text-3xl sm:text-4xl lg:text-6xl text-ink-300 tracking-wider normal-case select-none will-change-transform whitespace-nowrap leading-[1.15] text-center"
+                    className="hero-line font-sans font-medium text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-[var(--color-neutral-primary)] tracking-tight normal-case select-none will-change-transform whitespace-nowrap leading-[1.1] text-center"
                 >
                     based in Philippines.
                 </p>
@@ -235,12 +235,12 @@ export function Hero() {
                 className="relative z-10 w-full flex flex-col items-center justify-start gap-2 sm:gap-4 md:gap-6 text-center will-change-transform"
             >
                 {/* Center Description */}
-                <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted max-w-6xl px-4 sm:px-6 pt-4 tracking-[0.01em] leading-[1.15] text-center">
+                <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-[var(--text-secondary)] max-w-6xl px-4 sm:px-6 pt-4 tracking-[0.01em] leading-[1.25] text-center font-normal">
                     Designing and developing visually stunning, technically proficient websites tailored to client needs.
                 </p>
 
                 {/* Center Actions */}
-                <div className="flex flex-wrap items-center justify-center shrink-0 text-sm sm:text-base font-mono tracking-wider uppercase">
+                <div className="flex flex-wrap items-center justify-center shrink-0 text-sm sm:text-base font-sans font-medium tracking-wider uppercase">
                     <Link
                         href="/contact"
                         onClick={(e) => {
@@ -249,23 +249,23 @@ export function Hero() {
                         }}
                         onMouseEnter={() => setIsHoveredTalk(true)}
                         onMouseLeave={() => setIsHoveredTalk(false)}
-                        className="relative group inline-flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-4 bg-canvas rounded-none text-ink-300 hover:text-primary-500 transition-colors uppercase cursor-pointer select-none"
+                        className="relative group inline-flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-4 bg-[var(--bg-secondary)] rounded-none text-[var(--text-primary)] hover:text-[var(--color-accent-primary)] transition-colors uppercase cursor-pointer select-none border border-[var(--border-primary)] shadow-sm hover:shadow-md"
                     >
                         {/* Extended crosshair borders forming plus corners */}
-                        <span aria-hidden="true" className="absolute -left-2 -right-2 top-0 border-t border-black pointer-events-none" />
-                        <span aria-hidden="true" className="absolute -left-2 -right-2 bottom-0 border-b border-black pointer-events-none" />
-                        <span aria-hidden="true" className="absolute -top-2 -bottom-2 left-0 border-l border-black pointer-events-none" />
-                        <span aria-hidden="true" className="absolute -top-2 -bottom-2 right-0 border-r border-black pointer-events-none" />
+                        <span aria-hidden="true" className="absolute -left-2 -right-2 top-0 border-t border-[var(--color-neutral-primary)] pointer-events-none opacity-40" />
+                        <span aria-hidden="true" className="absolute -left-2 -right-2 bottom-0 border-b border-[var(--color-neutral-primary)] pointer-events-none opacity-40" />
+                        <span aria-hidden="true" className="absolute -top-2 -bottom-2 left-0 border-l border-[var(--color-neutral-primary)] pointer-events-none opacity-40" />
+                        <span aria-hidden="true" className="absolute -top-2 -bottom-2 right-0 border-r border-[var(--color-neutral-primary)] pointer-events-none opacity-40" />
 
                         <AnimatedSplitText
                             text="LETS TALK"
                             isHovered={isHoveredTalk}
-                            className="font-mono text-sm sm:text-base tracking-wider"
-                            colorTop="text-ink-300"
-                            colorBottom="text-primary-500"
+                            className="font-sans font-medium text-sm sm:text-base tracking-wider"
+                            colorTop="text-[var(--text-primary)]"
+                            colorBottom="text-[var(--color-accent-primary)]"
                         />
                         <ArrowUpRight
-                            className={`w-4 h-4 transition-transform duration-300 ease-out ${isHoveredTalk ? "text-primary-500 translate-x-0.5 -translate-y-0.5" : "text-ink-300"
+                            className={`w-4 h-4 transition-transform duration-300 ease-out ${isHoveredTalk ? "text-[var(--color-accent-primary)] translate-x-0.5 -translate-y-0.5" : "text-[var(--text-primary)]"
                                 }`}
                         />
                     </Link>

@@ -137,16 +137,16 @@ export function TechStack() {
       className="flex flex-col shrink-0 select-none"
     >
       {/* Row 1 */}
-      <div className="flex border-b border-black/15">
+      <div className="flex border-b border-[var(--border-primary)]">
         {row1Tech.map((item, idx) => (
           <div
             key={`r1-${idx}`}
-            className="group flex items-center justify-center gap-4 w-44 sm:w-52 md:w-60 h-16 sm:h-20 md:h-24 bg-[#f2f2f2] hover:bg-[#eaeaea] transition-colors duration-200 shrink-0 select-none cursor-grab active:cursor-grabbing border-r border-black/15"
+            className="group flex items-center justify-center gap-4 w-44 sm:w-52 md:w-60 h-16 sm:h-20 md:h-24 bg-[var(--bg-primary)] hover:bg-[var(--bg-secondary)] transition-colors duration-200 shrink-0 select-none cursor-grab active:cursor-grabbing border-r border-[var(--border-primary)]"
           >
             <div className="w-5 h-5 sm:w-6 sm:h-6 shrink-0 flex items-center justify-center filter grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
               <StackIcon name={item.iconName} className="w-full h-full object-contain" />
             </div>
-            <span className="font-mono text-sm sm:text-base tracking-wider uppercase text-black/75 group-hover:text-black font-medium transition-colors whitespace-nowrap">
+            <span className="font-sans text-sm sm:text-base tracking-wider uppercase text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] font-semibold transition-colors whitespace-nowrap">
               {item.name}
             </span>
           </div>
@@ -158,12 +158,12 @@ export function TechStack() {
         {row2Tech.map((item, idx) => (
           <div
             key={`r2-${idx}`}
-            className="group flex items-center justify-center gap-4 w-44 sm:w-52 md:w-60 h-16 sm:h-20 md:h-24 bg-[#f2f2f2] hover:bg-[#eaeaea] transition-colors duration-200 shrink-0 select-none cursor-grab active:cursor-grabbing border-r border-black/15"
+            className="group flex items-center justify-center gap-4 w-44 sm:w-52 md:w-60 h-16 sm:h-20 md:h-24 bg-[var(--bg-primary)] hover:bg-[var(--bg-secondary)] transition-colors duration-200 shrink-0 select-none cursor-grab active:cursor-grabbing border-r border-[var(--border-primary)]"
           >
             <div className="w-5 h-5 sm:w-6 sm:h-6 shrink-0 flex items-center justify-center filter grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
               <StackIcon name={item.iconName} className="w-full h-full object-contain" />
             </div>
-            <span className="font-mono text-sm sm:text-base tracking-wider uppercase text-black/75 group-hover:text-black font-medium transition-colors whitespace-nowrap">
+            <span className="font-sans text-sm sm:text-base tracking-wider uppercase text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] font-semibold transition-colors whitespace-nowrap">
               {item.name}
             </span>
           </div>
@@ -181,11 +181,11 @@ export function TechStack() {
       {/* Edge feathering */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-0 top-0 bottom-0 w-10 sm:w-20 md:w-32 bg-gradient-to-r from-[#f2f2f2] via-[#f2f2f2]/80 to-transparent z-10"
+        className="pointer-events-none absolute left-0 top-0 bottom-0 w-10 sm:w-20 md:w-32 bg-gradient-to-r from-[var(--bg-secondary)] via-[var(--bg-secondary)]/80 to-transparent z-10"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute right-0 top-0 bottom-0 w-10 sm:w-20 md:w-32 bg-gradient-to-l from-[#f2f2f2] via-[#f2f2f2]/80 to-transparent z-10"
+        className="pointer-events-none absolute right-0 top-0 bottom-0 w-10 sm:w-20 md:w-32 bg-gradient-to-l from-[var(--bg-secondary)] via-[var(--bg-secondary)]/80 to-transparent z-10"
       />
 
       {/* Infinite + Free Drag Container */}
@@ -195,7 +195,7 @@ export function TechStack() {
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
         onPointerCancel={handlePointerUp}
-        className={`w-full overflow-hidden flex items-center border-y border-black/15 ${isGrabbing ? "cursor-grabbing" : "cursor-grab"
+        className={`w-full overflow-hidden flex items-center border-y border-[var(--border-primary)] bg-[var(--bg-primary)] shadow-sm ${isGrabbing ? "cursor-grabbing" : "cursor-grab"
           }`}
       >
         <div

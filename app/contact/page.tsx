@@ -10,9 +10,9 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
     return (
-        <main className="section-dark min-h-screen flex flex-col items-center justify-center pt-28 pb-16 text-center">
-            <h1 className="font-pixel-circle text-3xl sm:text-4xl lg:text-6xl text-ink-300 tracking-wider uppercase">
-                Contact
+        <main className="bg-[var(--bg-canvas)] min-h-screen flex flex-col items-center justify-center pt-28 pb-16 text-center">
+            <h1 className="font-sans font-medium text-4xl sm:text-5xl lg:text-7xl text-[var(--color-neutral-primary)] tracking-tight uppercase">
+                CONTACT
             </h1>
         </main>
     );

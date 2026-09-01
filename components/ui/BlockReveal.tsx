@@ -15,7 +15,7 @@ export interface BlockRevealProps {
     mode?: BlockRevealMode;
     /** Wrapper HTML tag/component (defaults to "div" or "span" based on layout) */
     as?: React.ElementType;
-    /** Tailwind background class or custom solid color for the overlay curtain block (default: "bg-primary-500") */
+    /** Tailwind background class or custom solid color for the overlay curtain block (default: "bg-[var(--color-accent-primary)]") */
     blockColor?: string;
     /** Controlled active flag. When true, transitions in; when false, transitions out in reverse */
     isActive?: boolean;
@@ -54,7 +54,7 @@ export function BlockReveal({
     children,
     mode,
     as: Component = "span",
-    blockColor = "bg-primary-500",
+    blockColor = "bg-[var(--color-accent-primary)]",
     isActive,
     triggerOnView = false,
     duration = 0.4,
