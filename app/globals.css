@@ -2,54 +2,65 @@
 
 /* ==========================================================================
    PORTFOLIO DESIGN SYSTEM (app/globals.css)
-   Ultra-Minimalist 4-Color System:
-   - Canvas (Main Background): #fafafa (Off-white)
-   - Text Color (Dark Gray):   #212121
-   - Surface / Sections:       #efefef
-   - Signature Accent:         #ff4d00 (Orange)
+   Ultra-Minimalist Color System:
+   - Canvas (Main Background): #000000 (Pure Black)
+   - Canvas Text:              #efefef (Light Off-White)
+   - Canvas Muted Text:        #b0b0b0 (Soft Gray)
+   - Surface / Customized BG:  #efefef (Light Surface)
+   - Surface Text:             #000000 (Black)
+   - Surface Muted Text:       #b0b0b0 ("bobobo" Muted Gray)
+   - Signature Accent:         #ff4d00 (Untouched Signature Orange)
    ========================================================================== */
 
 @theme {
-  /* Core 4-Color System */
-  --color-canvas: #fafafa;
-  --color-text: #212121;
+  /* Core Color System */
+  --color-canvas: #000000;
+  --color-text: #efefef;
+  --color-text-muted: #b0b0b0;
   --color-surface: #efefef;
+  --color-surface-text: #000000;
+  --color-surface-text-muted: #b0b0b0;
   --color-accent: #ff4d00;
   --color-accent-hover: #e04400;
 
-  /* Semantic Variables (Mapped directly to the 4 colors) */
-  --color-neutral-primary: #212121;
-  --color-neutral-secondary: #212121;
-  --color-neutral-inverse: #fafafa;
+  /* Semantic Variables */
+  --color-neutral-primary: #efefef;
+  --color-neutral-secondary: #b0b0b0;
+  --color-neutral-inverse: #000000;
   --color-accent-primary: #ff4d00;
   --color-accent-primary-hover: #e04400;
 
   /* Contextual Backgrounds */
-  --bg-canvas: #fafafa;
-  --bg-primary: #fafafa;
+  --bg-canvas: #000000;
+  --bg-primary: #000000;
   --bg-secondary: #efefef;
   --bg-surface: #efefef;
   --bg-card: #efefef;
   --bg-transition: #efefef;
   --bg-menu-overlay: #efefef;
   --bg-curve-transition: #efefef;
-  --bg-inverse: #212121;
+  --bg-inverse: #efefef;
   --bg-accent-primary: #ff4d00;
 
   /* Text Mappings */
-  --text-primary: #212121;
-  --text-secondary: #212121;
-  --text-muted: #212121;
-  --text-inverse-primary: #fafafa;
-  --text-inverse-secondary: #efefef;
+  --text-primary: #efefef;
+  --text-secondary: #b0b0b0;
+  --text-muted: #b0b0b0;
+  --text-inverse-primary: #000000;
+  --text-inverse-secondary: #b0b0b0;
   --text-accent-primary: #ff4d00;
 
+  /* Surface Text Mappings (for elements on #efefef surface) */
+  --text-surface: #000000;
+  --text-surface-muted: #b0b0b0;
+
   /* Border Mappings */
-  --border-primary: #efefef;
-  --border-secondary: #efefef;
+  --border-primary: #222222;
+  --border-secondary: #333333;
+  --border-surface: #d8d8d8;
   --border-accent: #ff4d00;
-  --border-inverse-primary: #212121;
-  --border-inverse-secondary: #212121;
+  --border-inverse-primary: #efefef;
+  --border-inverse-secondary: #b0b0b0;
 
   /* Spacing Scale */
   --spacing-0-25x: 0.25rem;
@@ -91,46 +102,53 @@
 }
 
 :root {
-  /* Core 4-Color System */
-  --color-canvas: #fafafa;
-  --color-text: #212121;
+  /* Core Color System */
+  --color-canvas: #000000;
+  --color-text: #efefef;
+  --color-text-muted: #b0b0b0;
   --color-surface: #efefef;
+  --color-surface-text: #000000;
+  --color-surface-text-muted: #b0b0b0;
   --color-accent: #ff4d00;
   --color-accent-hover: #e04400;
 
   /* Core Semantic Tokens */
-  --color-neutral-primary: #212121;
-  --color-neutral-secondary: #212121;
-  --color-neutral-inverse: #fafafa;
+  --color-neutral-primary: #efefef;
+  --color-neutral-secondary: #b0b0b0;
+  --color-neutral-inverse: #000000;
   --color-accent-primary: #ff4d00;
   --color-accent-primary-hover: #e04400;
 
   /* Applied Contextual Variables */
-  --bg-canvas: #fafafa;
-  --bg-primary: #fafafa;
+  --bg-canvas: #000000;
+  --bg-primary: #000000;
   --bg-secondary: #efefef;
   --bg-surface: #efefef;
   --bg-card: #efefef;
   --bg-transition: #efefef;
   --bg-menu-overlay: #efefef;
   --bg-curve-transition: #efefef;
-  --bg-inverse: #212121;
+  --bg-inverse: #efefef;
   --bg-accent-primary: #ff4d00;
 
   /* Text Colors */
-  --text-primary: #212121;
-  --text-secondary: #212121;
-  --text-muted: #212121;
-  --text-inverse-primary: #fafafa;
-  --text-inverse-secondary: #efefef;
+  --text-primary: #efefef;
+  --text-secondary: #b0b0b0;
+  --text-muted: #b0b0b0;
+  --text-inverse-primary: #000000;
+  --text-inverse-secondary: #b0b0b0;
   --text-accent-primary: #ff4d00;
 
+  --text-surface: #000000;
+  --text-surface-muted: #b0b0b0;
+
   /* Border Colors */
-  --border-primary: #efefef;
-  --border-secondary: #efefef;
+  --border-primary: #222222;
+  --border-secondary: #333333;
+  --border-surface: #d8d8d8;
   --border-accent: #ff4d00;
-  --border-inverse-primary: #212121;
-  --border-inverse-secondary: #212121;
+  --border-inverse-primary: #efefef;
+  --border-inverse-secondary: #b0b0b0;
 
   /* Border Radius & Rem Spacing Scale */
   --radius-sm: 0.125rem; 
@@ -386,26 +404,26 @@ body {
 }
 
 .c-btn.is-white {
-  background-color: var(--color-canvas);
-  color: var(--color-text);
-  border-color: var(--border-primary);
+  background-color: var(--bg-surface);
+  color: var(--text-surface);
+  border-color: var(--border-surface);
 }
 
 .c-btn.is-white:hover:not(:disabled) {
-  background-color: var(--color-surface);
-  border-color: var(--border-secondary);
-  color: var(--color-text);
+  background-color: #e0e0e0;
+  border-color: #cccccc;
+  color: #000000;
 }
 
 .c-btn.is-light {
   background-color: var(--color-surface);
-  color: var(--text-primary);
-  border-color: var(--border-primary);
+  color: var(--text-surface);
+  border-color: var(--border-surface);
 }
 
 .c-btn.is-light:hover:not(:disabled) {
-  background-color: var(--color-surface);
-  border-color: var(--border-secondary);
+  background-color: #e0e0e0;
+  border-color: #cccccc;
 }
 
 .c-btn.is-accent {
@@ -422,20 +440,20 @@ body {
 
 .c-btn.is-inverse {
   background-color: var(--color-canvas);
-  color: var(--color-text);
+  color: var(--text-primary);
   border-color: var(--border-primary);
 }
 
 .c-btn.is-inverse:hover:not(:disabled) {
-  background-color: var(--color-surface);
+  background-color: #1a1a1a;
 }
 
 .c-btn.has-shadow {
-  box-shadow: 0 4px 14px rgba(33, 33, 33, 0.06);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
 }
 
 .c-btn.has-shadow:hover:not(:disabled) {
-  box-shadow: 0 6px 20px rgba(33, 33, 33, 0.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
 .c-btn.is-round {
@@ -445,7 +463,8 @@ body {
 /* Card Components (.c-card) */
 .c-card {
   background-color: var(--bg-surface);
-  border: 1px solid var(--border-primary);
+  color: var(--text-surface);
+  border: 1px solid var(--border-surface);
   border-radius: var(--radius-lg);
   padding: var(--space-2x);
   transition: border-color var(--duration-fast), box-shadow var(--duration-fast), transform var(--duration-fast);
@@ -453,21 +472,22 @@ body {
 
 .c-card.is-light {
   background-color: var(--bg-surface);
-  border-color: var(--border-primary);
+  color: var(--text-surface);
+  border-color: var(--border-surface);
 }
 
 .c-card.is-inverse {
-  background-color: var(--bg-inverse);
-  border-color: var(--border-inverse-primary);
-  color: var(--text-inverse-primary);
+  background-color: var(--bg-canvas);
+  border-color: var(--border-primary);
+  color: var(--text-primary);
 }
 
 .c-card.has-shadow {
-  box-shadow: 0 2px 8px rgba(33, 33, 33, 0.04);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
 .c-card.has-shadow:hover {
-  box-shadow: 0 6px 16px rgba(33, 33, 33, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
   transform: translateY(-2px);
 }
 
@@ -501,7 +521,7 @@ body {
   font-size: 0.9375rem;
   padding: var(--space-0-75x) var(--space-1x);
   color: var(--text-primary);
-  background-color: var(--bg-canvas);
+  background-color: #0c0c0c;
   border: 1px solid var(--border-primary);
   border-radius: var(--radius-md);
   transition: border-color var(--duration-fast), box-shadow var(--duration-fast), background-color var(--duration-fast);
@@ -509,8 +529,8 @@ body {
 
 .c-input::placeholder,
 .c-textarea::placeholder {
-  color: var(--color-text);
-  opacity: 0.5;
+  color: var(--text-muted);
+  opacity: 0.7;
 }
 
 .c-input:focus,
@@ -524,13 +544,15 @@ body {
 .c-input.is-light,
 .c-textarea.is-light {
   background-color: var(--bg-surface);
+  color: var(--text-surface);
+  border-color: var(--border-surface);
 }
 
 .c-input.is-inverse,
 .c-textarea.is-inverse {
-  background-color: var(--color-text);
-  border-color: var(--color-text);
-  color: var(--color-canvas);
+  background-color: var(--color-canvas);
+  border-color: var(--border-primary);
+  color: var(--text-primary);
 }
 
 .c-input.is-inverse:focus,

@@ -11,7 +11,7 @@ import { geist } from "./fonts";
 const BASE_URL = "https://jerichourbano.com";
 
 export const viewport: Viewport = {
-  themeColor: "#121826",
+  themeColor: "#000000",
   width: "device-width",
   initialScale: 1,
 };
@@ -110,7 +110,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className="relative min-h-screen bg-[var(--bg-secondary)] text-[var(--text-primary)] font-sans selection:bg-[var(--color-accent-primary)] selection:text-white"
+        className="relative min-h-screen bg-[var(--bg-canvas)] text-[var(--text-primary)] font-sans selection:bg-[var(--color-accent-primary)] selection:text-white"
         suppressHydrationWarning
       >
         {/* Global DotLens Base Background */}
@@ -119,8 +119,8 @@ export default function RootLayout({
           aria-hidden="true"
         >
           <DotLens
-            background="#f8fafc"
-            baseColor="#cbd5e1"
+            background="#000000"
+            baseColor="#262626"
             accentColor="#ff4d00"
             density={80}
             dotSize={20}

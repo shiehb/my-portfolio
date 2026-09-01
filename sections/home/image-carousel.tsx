@@ -142,11 +142,11 @@ export function ImageCarousel({
       {/* Feathering at the start (left) and end (right) */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-28 md:w-36 bg-gradient-to-r from-[#f2f2f2] via-[#f2f2f2]/80 to-transparent z-10"
+        className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-28 md:w-36 bg-gradient-to-r from-[#000000] via-[#000000]/80 to-transparent z-10"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-28 md:w-36 bg-gradient-to-l from-[#f2f2f2] via-[#f2f2f2]/80 to-transparent z-10"
+        className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-28 md:w-36 bg-gradient-to-l from-[#000000] via-[#000000]/80 to-transparent z-10"
       />
 
       <div

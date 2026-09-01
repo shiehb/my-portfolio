@@ -5,44 +5,41 @@
 
 :root {
   /* Core Palette Defaults */
-  --color-neutral-primary: #121826;        /* Dark Charcoal (Not Pitch Black) */
-  --color-neutral-secondary: #333e52;      /* Deep Slate Charcoal */
-  --color-neutral-inverse: #ffffff;        /* Pure White */
-  --color-accent-primary: #2563eb;        /* Royal Blue Accent */
-  --color-accent-primary-hover: #1d4ed8;
-  --color-accent-secondary: #7c3aed;      /* Violet Accent */
-  --color-accent-secondary-hover: #6d28d9;
-  --color-accent-tertiary: #059669;       /* Emerald Accent */
-  --color-accent-tertiary-hover: #047857;
-
-  /* Tint Scales (A90 to A10) */
-  --color-neutral-primary-a90: #1a2234;
-  --color-neutral-primary-a80: #253046;
-  --color-neutral-primary-a50: #64748b;
-  --color-neutral-primary-a20: #e2e8f0;
-  --color-neutral-primary-a10: #f8fafc;   /* Soft Gray-White */
+  --color-neutral-primary: #efefef;        /* Light Off-White Text */
+  --color-neutral-secondary: #b0b0b0;      /* Muted Gray (bobobo) */
+  --color-neutral-inverse: #000000;        /* Pure Black */
+  --color-accent-primary: #ff4d00;        /* Signature Orange Accent */
+  --color-accent-primary-hover: #e04400;
+  --color-accent-secondary: #ff4d00;
+  --color-accent-secondary-hover: #e04400;
+  --color-accent-tertiary: #ff4d00;
+  --color-accent-tertiary-hover: #e04400;
 
   /* Applied Contextual Variables */
-  --bg-primary: #ffffff;                   /* Main White Canvas */
-  --bg-secondary: #f8fafc;                 /* Slight Gray-White Accent Canvas */
+  --bg-primary: #000000;                   /* Main Black Canvas */
+  --bg-secondary: #efefef;                 /* Customized Surface BG */
+  --bg-canvas: #000000;
+  --bg-surface: #efefef;
   --bg-accent-primary: var(--color-accent-primary);
   --bg-accent-secondary: var(--color-accent-secondary);
   --bg-accent-tertiary: var(--color-accent-tertiary);
-  --bg-inverse: var(--color-neutral-primary); /* Charcoal Backgrounds */
+  --bg-inverse: #efefef;                   /* Surface Backgrounds */
 
   /* Text Colors */
-  --text-primary: var(--color-neutral-primary); /* Dark Charcoal Text */
-  --text-secondary: #475569;                /* Slate Gray Text */
-  --text-inverse-primary: #ffffff;           /* White Text on Charcoal */
-  --text-inverse-secondary: #cbd5e1;         /* Soft Light Gray Text */
+  --text-primary: var(--color-neutral-primary); /* #efefef Text */
+  --text-secondary: #b0b0b0;                /* Muted Gray Text */
+  --text-muted: #b0b0b0;
+  --text-inverse-primary: #000000;           /* Black Text on Surface */
+  --text-inverse-secondary: #b0b0b0;         /* Muted Gray Text on Surface */
   --text-accent-primary: var(--color-accent-primary);
 
   /* Border Colors */
-  --border-primary: #e2e8f0;                /* Light Gray Border */
-  --border-secondary: #cbd5e1;              /* Medium Gray Border */
+  --border-primary: #222222;                /* Dark Border on Black Canvas */
+  --border-secondary: #333333;              /* Medium Gray Border */
+  --border-surface: #d8d8d8;                /* Light Surface Border */
   --border-accent: var(--color-accent-primary);
-  --border-inverse-primary: #253046;        /* Charcoal Border */
-  --border-inverse-secondary: #333e52;
+  --border-inverse-primary: #efefef;
+  --border-inverse-secondary: #b0b0b0;
 
   /* Border Radius & Rem Spacing Scale */
   --radius-sm: 0.125rem; 
@@ -467,6 +464,7 @@
     font-weight: 600;
     color: var(--text-primary);
     letter-spacing: 0.02em;
+    -webkit-user-select: none;
     user-select: none;
   }
 
@@ -568,6 +566,11 @@
   .u-all-caps {
     text-transform: uppercase;
     letter-spacing: 0.05em;
+  }
+
+  .select-none {
+    -webkit-user-select: none;
+    user-select: none;
   }
 
   /* Direct CSS Variable Utility Mappings */

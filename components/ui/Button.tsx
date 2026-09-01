@@ -25,7 +25,7 @@ export function Button({
     primary:
       "bg-[var(--color-neutral-primary)] text-[var(--color-neutral-inverse)] hover:opacity-90 active:translate-y-0.5",
     secondary:
-      "bg-transparent text-[var(--text-primary)] border border-[var(--border-primary)] hover:bg-[var(--bg-secondary)] active:translate-y-0.5",
+      "bg-transparent text-[var(--text-primary)] border border-[var(--border-primary)] hover:bg-[#1a1a1a] hover:border-[var(--border-secondary)] active:translate-y-0.5",
     accent:
       "bg-[var(--color-accent-primary)] text-white hover:bg-[var(--color-accent-primary-hover)] shadow-sm hover:shadow-[0_0_16px_rgba(255,77,0,0.3)] active:translate-y-0.5",
   };

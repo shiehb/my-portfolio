@@ -52,24 +52,24 @@ export function About() {
                             }}
                             onMouseEnter={() => setIsHoveredMore(true)}
                             onMouseLeave={() => setIsHoveredMore(false)}
-                            className="relative group inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[var(--bg-primary)] rounded-none text-[var(--text-primary)] hover:text-[var(--color-accent-primary)] transition-colors uppercase cursor-pointer select-none border border-[var(--border-primary)] shadow-sm hover:shadow-md"
+                            className="relative group inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[var(--bg-canvas)] rounded-none text-[var(--text-primary)] hover:text-[var(--color-accent-primary)] transition-colors uppercase cursor-pointer select-none border border-[var(--border-primary)] shadow-sm hover:shadow-md"
                         >
                             {/* Extended crosshair borders forming plus corners */}
                             <span
                                 aria-hidden="true"
-                                className="absolute -left-2 -right-2 top-0 border-t border-[var(--color-neutral-primary)] pointer-events-none opacity-40"
+                                className="absolute -left-2 -right-2 top-0 border-t border-[#333333] pointer-events-none opacity-80"
                             />
                             <span
                                 aria-hidden="true"
-                                className="absolute -left-2 -right-2 bottom-0 border-b border-[var(--color-neutral-primary)] pointer-events-none opacity-40"
+                                className="absolute -left-2 -right-2 bottom-0 border-b border-[#333333] pointer-events-none opacity-80"
                             />
                             <span
                                 aria-hidden="true"
-                                className="absolute -top-2 -bottom-2 left-0 border-l border-[var(--color-neutral-primary)] pointer-events-none opacity-40"
+                                className="absolute -top-2 -bottom-2 left-0 border-l border-[#333333] pointer-events-none opacity-80"
                             />
                             <span
                                 aria-hidden="true"
-                                className="absolute -top-2 -bottom-2 right-0 border-r border-[var(--color-neutral-primary)] pointer-events-none opacity-40"
+                                className="absolute -top-2 -bottom-2 right-0 border-r border-[#333333] pointer-events-none opacity-80"
                             />
 
                             <AnimatedSplitText
@@ -91,14 +91,14 @@ export function About() {
 
                 {/* Column 2: 4 cols on desktop for a design system feature card */}
                 <div className="col-span-1 md:col-span-4 flex flex-col gap-4">
-                    <div className="c-card has-shadow p-6 rounded-card bg-[var(--bg-secondary)] border border-[var(--border-primary)]">
+                    <div className="c-card has-shadow p-6 rounded-card bg-[var(--bg-surface)] text-[var(--text-surface)] border border-[var(--border-surface)]">
                         <span className="font-sans text-xs uppercase tracking-widest text-[var(--color-accent-primary)] font-semibold mb-2 block">
                             Core Focus
                         </span>
-                        <h3 className="text-lg font-bold text-[var(--color-neutral-primary)] mb-2 font-sans">
+                        <h3 className="text-lg font-bold text-[#000000] mb-2 font-sans">
                             Systems & Architecture
                         </h3>
-                        <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed font-sans">
+                        <p className="text-xs sm:text-sm text-[#b0b0b0] leading-relaxed font-sans font-medium">
                             Crafting scalable UI components, modular design tokens, and fluid interactions with zero layout shifts.
                         </p>
                     </div>

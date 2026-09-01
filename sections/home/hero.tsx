@@ -249,13 +249,13 @@ export function Hero() {
                         }}
                         onMouseEnter={() => setIsHoveredTalk(true)}
                         onMouseLeave={() => setIsHoveredTalk(false)}
-                        className="relative group inline-flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-4 bg-[var(--bg-secondary)] rounded-none text-[var(--text-primary)] hover:text-[var(--color-accent-primary)] transition-colors uppercase cursor-pointer select-none border border-[var(--border-primary)] shadow-sm hover:shadow-md"
+                        className="relative group inline-flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-4 bg-[var(--bg-canvas)] rounded-none text-[var(--text-primary)] hover:text-[var(--color-accent-primary)] transition-colors uppercase cursor-pointer select-none border border-[var(--border-primary)] shadow-sm hover:shadow-md"
                     >
                         {/* Extended crosshair borders forming plus corners */}
-                        <span aria-hidden="true" className="absolute -left-2 -right-2 top-0 border-t border-[var(--color-neutral-primary)] pointer-events-none opacity-40" />
-                        <span aria-hidden="true" className="absolute -left-2 -right-2 bottom-0 border-b border-[var(--color-neutral-primary)] pointer-events-none opacity-40" />
-                        <span aria-hidden="true" className="absolute -top-2 -bottom-2 left-0 border-l border-[var(--color-neutral-primary)] pointer-events-none opacity-40" />
-                        <span aria-hidden="true" className="absolute -top-2 -bottom-2 right-0 border-r border-[var(--color-neutral-primary)] pointer-events-none opacity-40" />
+                        <span aria-hidden="true" className="absolute -left-2 -right-2 top-0 border-t border-[#333333] pointer-events-none opacity-80" />
+                        <span aria-hidden="true" className="absolute -left-2 -right-2 bottom-0 border-b border-[#333333] pointer-events-none opacity-80" />
+                        <span aria-hidden="true" className="absolute -top-2 -bottom-2 left-0 border-l border-[#333333] pointer-events-none opacity-80" />
+                        <span aria-hidden="true" className="absolute -top-2 -bottom-2 right-0 border-r border-[#333333] pointer-events-none opacity-80" />
 
                         <AnimatedSplitText
                             text="LETS TALK"

@@ -12,9 +12,9 @@ export function Badge({
   ...props
 }: BadgeProps) {
   const variantStyles = {
-    default: "bg-[var(--bg-secondary)] text-[var(--text-primary)] border-[var(--border-primary)]",
-    accent: "bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)] border-[var(--color-accent-primary)]/30",
-    surface: "bg-[var(--bg-canvas)] text-[var(--text-primary)] border-[var(--border-primary)]",
+    default: "bg-[#111111] text-[var(--text-primary)] border-[var(--border-primary)]",
+    accent: "bg-[var(--color-accent-primary)]/15 text-[var(--color-accent-primary)] border-[var(--color-accent-primary)]/30",
+    surface: "bg-[var(--bg-surface)] text-[var(--text-surface)] border-[var(--border-surface)]",
   };
 
   return (
