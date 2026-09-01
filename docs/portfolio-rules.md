@@ -22,7 +22,7 @@ All values live in `app/globals.css` as CSS variables inside `@theme`. Never har
 
 Every visual pattern that repeats — button, link, card, badge, section wrapper, input — is a component, not a one-off className string. Before writing markup, check if it already exists in `components/ui/`; extend it with a prop rather than duplicating it.
 
-1. **Location**: `components/ui/` for primitives (Button, Link, Card, Badge, Tag, Input). `components/sections/` for page sections (Hero, Projects, About, Contact) that compose primitives.
+1. **Location**: `components/ui/` for primitives (Button, Link, Card, Badge, Tag, Input). `components/layout/` for structural chrome (Navbar, Footer, MenuOverlay). `sections/` (or `src/sections/`) for page sections (Hero, Projects, About, Contact) that compose primitives.
 2. **Variant pattern**: every primitive takes a `variant` prop typed as a union (`"primary" | "secondary" | "tertiary"`), mapped to a class lookup object — same pattern as `Button.tsx` and `TextLink` already built. Don't branch variants with if/else chains.
 3. **Emphasis mapping** (apply consistently across every primitive that has variants, not just buttons):
    - `primary` — solid/filled, highest visual weight, one per section max (the actual CTA).
@@ -48,23 +48,45 @@ Every visual pattern that repeats — button, link, card, badge, section wrapper
 ## File structure
 
 ```
-app/
-  layout.tsx        // mounts <SmoothScroll />, imports globals.css
-  globals.css
-  page.tsx           // composes section components only, no raw markup
-components/
-  ui/
-    Button.tsx
-    Link.tsx
-    Card.tsx
-    Badge.tsx
-  sections/
-    Hero.tsx
-    Projects.tsx
-    About.tsx
-    Contact.tsx
-lib/
-  SmoothScroll.tsx
+├── app/
+│   ├── layout.tsx              # Root shell: imports globals.css, SmoothScroll, DotLens, Navbar, Footer
+│   ├── globals.css             # CSS-first design tokens (@theme), color ramps & utility classes
+│   ├── page.tsx                # Landing page assembler (stacks modular sections)
+│   ├── about/
+│   │   └── page.tsx            # Dedicated About page
+│   ├── work/
+│   │   └── page.tsx            # Dedicated Work / Case Studies page
+│   └── contact/
+│       └── page.tsx            # Dedicated Contact & Inquiries page
+│
+├── components/
+│   ├── ui/                     # Reusable design system primitives
+│   │   ├── button.tsx          # .c-btn variants (primary, secondary, accent)
+│   │   ├── link.tsx            # CustomLink with page transitions & animated split text
+│   │   ├── card.tsx            # .c-card component (default, outlined, elevated)
+│   │   ├── badge.tsx           # Status tags & technology pills
+│   │   ├── AnimatedSplitText.tsx # Character split-text hover animation
+│   │   ├── AnimatedMenuIcon.tsx  # Interactive hamburger / close SVG icon
+│   │   ├── Magnetic.tsx        # Magnetic cursor pull effect
+│   │   ├── PageTransition.tsx  # Fullscreen transition manager
+│   │   └── DotLens.tsx         # Interactive dot canvas cursor
+│   │
+│   └── layout/                 # Global structural chrome
+│       ├── navbar.tsx          # Top bar with sticky glass blur & magnetic trigger
+│       ├── menu-overlay.tsx    # Fullscreen overlay with SVG morphing curves & scroll-lock
+│       └── footer.tsx          # Site footer with route filtering & copyright
+│
+├── sections/                   # Modular page-level section components
+│   ├── hero.tsx                # Dynamic headline with role cycling & scroll parallax
+│   ├── projects.tsx            # Interactive drag & auto-drifting tech stack marquee
+│   ├── about.tsx               # Bio summary, focus cards & crosshair CTA
+│   ├── contact.tsx             # Design system specifications & 4-color palette tokens
+│   ├── image-carousel.tsx      # Infinite momentum-based showcase carousel
+│   └── index.ts                # Central barrel export
+│
+└── lib/
+    ├── SmoothScroll.tsx        # Single-instance Lenis smooth scroll provider
+    └── utils.ts                # Tailwind class utility helpers
 ```
 
 ## Content/copy rules

@@ -1,15 +1,16 @@
-import { Hero } from "@/components/sections/Hero";
-import { TechStack } from "@/components/sections/TechStack";
-import { About } from "@/components/sections/About";
-import { DesignSystemShowcase } from "@/components/sections/DesignSystemShowcase";
+import { Hero } from "@/sections/home/hero";
+import { Projects } from "@/sections/home/projects";
+import { About } from "@/sections/home/about";
+import { Contact } from "@/sections/home/contact";
 
 export default function Home() {
   return (
-    <main>
+    <main id="main-content" className="w-full flex flex-col flex-1">
       <Hero />
-      <TechStack />
+      <Projects />
       <About />
-      <DesignSystemShowcase />
+      <Contact />
     </main>
   );
 }
+

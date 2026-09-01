@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { ArrowUpRight, Copy, Check, Layers, Palette, Grid3X3, MousePointerClick } from "lucide-react";
 
-export function DesignSystemShowcase() {
+export function Contact() {
   const [copiedToken, setCopiedToken] = useState<string | null>(null);
 
   const copyToClipboard = (text: string, tokenName: string) => {
@@ -13,17 +13,14 @@ export function DesignSystemShowcase() {
   };
 
   const palette = [
-    { name: "Neutral Primary (Dark Charcoal)", hex: "#121826", token: "--color-neutral-primary", bgClass: "bg-[#121826]", textLight: true },
-    { name: "Neutral Secondary (Deep Slate)", hex: "#333e52", token: "--color-neutral-secondary", bgClass: "bg-[#333e52]", textLight: true },
-    { name: "Neutral Inverse (Pure White)", hex: "#ffffff", token: "--color-neutral-inverse", bgClass: "bg-white border border-slate-200", textLight: false },
-    { name: "Canvas Background (Pure White)", hex: "#ffffff", token: "--bg-canvas", bgClass: "bg-[#ffffff] border border-slate-200", textLight: false },
-    { name: "Card Background (Soft Gray-White)", hex: "#f8fafc", token: "--bg-card", bgClass: "bg-[#f8fafc] border border-slate-200", textLight: false },
-    { name: "Accent Primary (Signature Orange)", hex: "#ff4d00", token: "--color-accent-primary", bgClass: "bg-[#ff4d00]", textLight: true },
-    { name: "Accent Primary Hover", hex: "#e04400", token: "--color-accent-primary-hover", bgClass: "bg-[#e04400]", textLight: true },
+    { name: "Canvas (Main Background)", hex: "#fafafa", token: "--color-canvas", bgClass: "bg-[#fafafa] border border-[#efefef]", textLight: false },
+    { name: "Text Color (Dark Gray)", hex: "#212121", token: "--color-text", bgClass: "bg-[#212121]", textLight: true },
+    { name: "Surface / Sections", hex: "#efefef", token: "--color-surface", bgClass: "bg-[#efefef] border border-[#efefef]", textLight: false },
+    { name: "Signature Accent (Orange)", hex: "#ff4d00", token: "--color-accent", bgClass: "bg-[#ff4d00]", textLight: true },
   ];
 
   return (
-    <section id="design-system" className="c-section relative w-full max-w-[1920px] mx-auto border-t border-[var(--border-primary)]">
+    <section id="contact" className="c-section relative w-full max-w-[1920px] mx-auto border-t border-[var(--border-primary)]">
       {/* Section Header */}
       <div className="mb-12">
         <div className="flex items-center gap-2 mb-3">
@@ -33,10 +30,10 @@ export function DesignSystemShowcase() {
           </span>
         </div>
         <h2 className="c-heading text-3xl sm:text-4xl md:text-5xl font-sans font-semibold tracking-tight normal-case mb-4">
-          Refined Dark Charcoal & Signature Orange
+          Ultra-Minimalist 4-Color Palette
         </h2>
         <p className="font-sans text-sm sm:text-base text-[var(--text-secondary)] max-w-3xl leading-relaxed">
-          Unified with custom CSS variables, signature orange accent, Geist typography, and responsive viewport breakpoints.
+          Aggressively minimal color system composed strictly of Canvas (#fafafa), Text (#212121), Surface (#efefef), and Signature Accent (#ff4d00).
         </p>
       </div>
 
@@ -207,3 +204,6 @@ export function DesignSystemShowcase() {
     </section>
   );
 }
+
+export { Contact as DesignSystemShowcase };
+export default Contact;

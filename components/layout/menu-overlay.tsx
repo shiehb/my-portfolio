@@ -5,9 +5,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowUpRight } from "lucide-react";
 import gsap from "gsap";
-import { usePageTransition } from "../ui/PageTransition";
-import { AnimatedSplitText } from "../ui/AnimatedSplitText";
-import { getCurvePaths } from "../ui/CurveTransition";
+import { usePageTransition } from "@/components/ui/PageTransition";
+import { AnimatedSplitText } from "@/components/ui/AnimatedSplitText";
+import { getCurvePaths } from "@/components/ui/CurveTransition";
 
 export interface MenuOverlayProps {
     isOpen: boolean;
@@ -73,7 +73,7 @@ function NavigationList({ pathname, hoveredLink, setHoveredLink, onItemClick }: 
                             text={link.label}
                             isHovered={isHovered || isActive}
                             className="font-sans font-medium text-4xl sm:text-5xl lg:text-6xl xl:text-7xl tracking-tight text-center"
-                            colorTop={isActive ? "text-[var(--color-accent-primary)]" : "text-[var(--text-inverse-primary)]"}
+                            colorTop={isActive ? "text-[var(--color-accent-primary)]" : "text-[var(--text-primary)]"}
                             colorBottom="text-[var(--color-accent-primary)]"
                         />
                     </Link>
@@ -94,7 +94,7 @@ interface SocialFooterProps {
 function SocialFooter({ hoveredSocial, setHoveredSocial }: SocialFooterProps) {
     return (
         <div className="nav-stagger-item flex flex-col items-center justify-center gap-3 w-full text-center">
-            <span className="text-xs sm:text-sm uppercase tracking-widest text-[var(--text-inverse-secondary)] font-medium text-center">
+            <span className="text-xs sm:text-sm uppercase tracking-widest text-[var(--text-secondary)] font-medium text-center">
                 Social Profiles
             </span>
             <ul className="flex flex-row items-center justify-center gap-6 sm:gap-8 whitespace-nowrap">
@@ -109,19 +109,19 @@ function SocialFooter({ hoveredSocial, setHoveredSocial }: SocialFooterProps) {
                                 rel="noopener noreferrer"
                                 onMouseEnter={() => setHoveredSocial(label)}
                                 onMouseLeave={() => setHoveredSocial(null)}
-                                className="group inline-flex items-center gap-2 text-sm lg:text-base text-[var(--text-inverse-secondary)] hover:text-[var(--color-accent-primary)] transition-colors py-0.5"
+                                className="group inline-flex items-center gap-2 text-sm lg:text-base text-[var(--text-secondary)] hover:text-[var(--color-accent-primary)] transition-colors py-0.5"
                             >
                                 <AnimatedSplitText
                                     text={label}
                                     isHovered={isHovered}
                                     className="font-sans text-sm lg:text-base font-medium tracking-wide"
-                                    colorTop="text-[var(--text-inverse-secondary)]"
+                                    colorTop="text-[var(--text-secondary)]"
                                     colorBottom="text-[var(--color-accent-primary)]"
                                 />
                                 <ArrowUpRight
                                     className={`w-4 h-4 transition-transform duration-300 ease-out ${isHovered
                                         ? "text-[var(--color-accent-primary)] translate-x-0.5 -translate-y-0.5 opacity-100"
-                                        : "text-[var(--text-inverse-secondary)] opacity-70"
+                                        : "text-[var(--text-secondary)] opacity-70"
                                         }`}
                                 />
                             </a>
@@ -155,6 +155,25 @@ export function MenuOverlay({ isOpen, onClose, onNavigate }: MenuOverlayProps) {
         if (onNavigate) onNavigate(href);
         navigateTo(href, label);
     };
+
+    // Lock background scrolling when menu overlay is open
+    useEffect(() => {
+        if (!isOpen) return;
+
+        const originalBodyOverflow = document.body.style.overflow;
+        const originalHtmlOverflow = document.documentElement.style.overflow;
+        const originalTouchAction = document.body.style.touchAction;
+
+        document.body.style.overflow = "hidden";
+        document.documentElement.style.overflow = "hidden";
+        document.body.style.touchAction = "none";
+
+        return () => {
+            document.body.style.overflow = originalBodyOverflow;
+            document.documentElement.style.overflow = originalHtmlOverflow;
+            document.body.style.touchAction = originalTouchAction;
+        };
+    }, [isOpen]);
 
     useEffect(() => {
         if (!overlayRef.current || !pathRef.current) return;
@@ -277,7 +296,7 @@ export function MenuOverlay({ isOpen, onClose, onNavigate }: MenuOverlayProps) {
             >
                 <path
                     ref={pathRef}
-                    fill="#121826"
+                    fill="var(--bg-menu-overlay, #efefef)"
                     d="M0 0 L1000 0 L1000 0 Q500 0 0 0 Z"
                 />
             </svg>
@@ -309,3 +328,4 @@ export function MenuOverlay({ isOpen, onClose, onNavigate }: MenuOverlayProps) {
     );
 }
 
+export default MenuOverlay;

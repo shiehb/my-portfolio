@@ -1,112 +1,43 @@
-"use client";
+import React from "react";
 
-import { ButtonHTMLAttributes, AnchorHTMLAttributes, ReactNode } from "react";
-import Link from "next/link";
-import { usePageTransition } from "./PageTransition";
-
-export type ButtonVariant = "primary" | "secondary" | "tertiary";
-export type ButtonSize = "sm" | "md" | "lg";
-
-const variantClass: Record<ButtonVariant, string> = {
-    primary: "btn btn-primary",
-    secondary: "btn btn-secondary",
-    tertiary: "btn btn-tertiary",
-};
-
-const sizeClass: Record<ButtonSize, string> = {
-    sm: "text-sm sm:text-base py-1.5 px-3",
-    md: "text-sm sm:text-base py-2.5 px-5",
-    lg: "text-sm sm:text-base py-3 px-6",
-};
-
-export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-    variant?: ButtonVariant;
-    size?: ButtonSize;
-    loading?: boolean;
-    icon?: ReactNode;
-    children: ReactNode;
-};
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: "primary" | "secondary" | "accent";
+  size?: "sm" | "md" | "lg";
+}
 
 export function Button({
-    variant = "primary",
-    size = "md",
-    loading = false,
-    icon,
-    disabled,
-    className = "",
-    children,
-    ...rest
+  children,
+  variant = "primary",
+  size = "md",
+  className = "",
+  ...props
 }: ButtonProps) {
-    return (
-        <button
-            className={`${variantClass[variant]} ${sizeClass[size]} ${className}`.trim()}
-            disabled={disabled || loading}
-            aria-busy={loading}
-            {...rest}
-        >
-            {loading ? (
-                <span className="inline-block w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin mr-1" />
-            ) : icon ? (
-                <span className="inline-flex shrink-0">{icon}</span>
-            ) : null}
-            {children}
-        </button>
-    );
+  const baseStyles =
+    "inline-flex items-center justify-center font-sans font-medium rounded-md transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed select-none";
+
+  const sizeStyles = {
+    sm: "px-3 py-1.5 text-xs gap-1.5",
+    md: "px-5 py-2.5 text-sm gap-2",
+    lg: "px-7 py-3.5 text-base gap-2.5",
+  };
+
+  const variantStyles = {
+    primary:
+      "bg-[var(--color-neutral-primary)] text-[var(--color-neutral-inverse)] hover:opacity-90 active:translate-y-0.5",
+    secondary:
+      "bg-transparent text-[var(--text-primary)] border border-[var(--border-primary)] hover:bg-[var(--bg-secondary)] active:translate-y-0.5",
+    accent:
+      "bg-[var(--color-accent-primary)] text-white hover:bg-[var(--color-accent-primary-hover)] shadow-sm hover:shadow-[0_0_16px_rgba(255,77,0,0.3)] active:translate-y-0.5",
+  };
+
+  return (
+    <button
+      className={`${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${className}`.trim()}
+      {...props}
+    >
+      {children}
+    </button>
+  );
 }
 
-export type LinkVariant = "primary" | "secondary" | "tertiary";
-
-const linkVariantClass: Record<LinkVariant, string> = {
-    primary: "link link-primary",
-    secondary: "link link-secondary",
-    tertiary: "link link-tertiary",
-};
-
-export type TextLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
-    variant?: LinkVariant;
-    href: string;
-    icon?: ReactNode;
-    children: ReactNode;
-};
-
-export function TextLink({
-    variant = "primary",
-    href,
-    icon,
-    className = "",
-    children,
-    onClick,
-    ...rest
-}: TextLinkProps) {
-    const { navigateTo } = usePageTransition();
-    const isInternal = href.startsWith("/") || href.startsWith("#");
-    const isPageRoute = href.startsWith("/") && !href.startsWith("/#") && href !== "#";
-    const combinedClassName = `${linkVariantClass[variant]} ${className}`.trim();
-
-    if (isInternal) {
-        return (
-            <Link
-                href={href}
-                className={combinedClassName}
-                onClick={(e) => {
-                    if (onClick) onClick(e);
-                    if (isPageRoute && !e.defaultPrevented) {
-                        e.preventDefault();
-                        navigateTo(href);
-                    }
-                }}
-                {...rest}
-            >
-                {icon ? <span className="inline-flex shrink-0 mr-1.5">{icon}</span> : null}
-                {children}
-            </Link>
-        );
-    }
-
-    return (
-        <a href={href} className={combinedClassName} onClick={onClick} {...rest}>
-            {icon ? <span className="inline-flex shrink-0 mr-1.5">{icon}</span> : null}
-            {children}
-        </a>
-    );
-}
+export default Button;

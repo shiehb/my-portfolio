@@ -246,3 +246,5 @@ export function ImageCarousel({
     </section>
   );
 }
+
+export default ImageCarousel;

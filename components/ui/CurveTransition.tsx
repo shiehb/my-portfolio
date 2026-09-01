@@ -74,7 +74,7 @@ export interface CurveTransitionProps {
  */
 export function CurveTransition({
     isActive,
-    fillColor = "#121826",
+    fillColor = "var(--bg-curve-transition, #efefef)",
     direction = "up",
     curveHeight = 250,
     className = "",

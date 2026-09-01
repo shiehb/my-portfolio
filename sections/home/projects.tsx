@@ -8,7 +8,7 @@ interface TechItem {
   iconName: IconName;
 }
 
-export function TechStack() {
+export function Projects() {
   const row1Tech: TechItem[] = [
     { name: "MOTION", iconName: "motion" },
     { name: "GSAP", iconName: "gsap" },
@@ -174,8 +174,8 @@ export function TechStack() {
 
   return (
     <section
-      id="stack"
-      aria-label="My Stack"
+      id="projects"
+      aria-label="Projects and Stack"
       className="relative w-full select-none overflow-hidden"
     >
       {/* Edge feathering */}
@@ -195,8 +195,9 @@ export function TechStack() {
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
         onPointerCancel={handlePointerUp}
-        className={`w-full overflow-hidden flex items-center border-y border-[var(--border-primary)] bg-[var(--bg-primary)] shadow-sm ${isGrabbing ? "cursor-grabbing" : "cursor-grab"
-          }`}
+        className={`w-full overflow-hidden flex items-center border-y border-[var(--border-primary)] bg-[var(--bg-primary)] shadow-sm ${
+          isGrabbing ? "cursor-grabbing" : "cursor-grab"
+        }`}
       >
         <div
           ref={trackRef}
@@ -214,3 +215,6 @@ export function TechStack() {
     </section>
   );
 }
+
+export { Projects as TechStack };
+export default Projects;

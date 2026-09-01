@@ -4,9 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { usePageTransition } from "../ui/PageTransition";
+import { usePageTransition } from "@/components/ui/PageTransition";
 import { ArrowUpRight } from "lucide-react";
-import { AnimatedSplitText } from "../ui/AnimatedSplitText";
+import { AnimatedSplitText } from "@/components/ui/AnimatedSplitText";
 
 const ROLES = ["Developer", "Designer"];
 
@@ -271,8 +271,8 @@ export function Hero() {
                     </Link>
                 </div>
             </div>
-        </section >
+        </section>
     );
 }
 
-
+export default Hero;

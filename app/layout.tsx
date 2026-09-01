@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { SmoothScroll } from "@/lib/SmoothScroll";
-import { Navbar } from "@/components/sections/Navbar";
-import { Footer } from "@/components/sections/Footer";
+import { Navbar } from "@/components/layout/navbar";
+import { Footer } from "@/components/layout/footer";
 import { PageTransitionProvider } from "@/components/ui/PageTransition";
 import DotLens from "@/components/ui/DotLens";
 import { BackgroundGrid } from "@/components/ui/BackgroundGrid";

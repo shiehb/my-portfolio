@@ -3,8 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { usePageTransition } from "../ui/PageTransition";
-import { AnimatedSplitText } from "../ui/AnimatedSplitText";
+import { usePageTransition } from "@/components/ui/PageTransition";
+import { AnimatedSplitText } from "@/components/ui/AnimatedSplitText";
 
 export function About() {
     const { navigateTo } = usePageTransition();
@@ -81,8 +81,8 @@ export function About() {
                             />
                             <ArrowUpRight
                                 className={`w-3.5 h-3.5 transition-transform duration-300 ease-out ${isHoveredMore
-                                    ? "text-[var(--color-accent-primary)] translate-x-0.5 -translate-y-0.5"
-                                    : "text-[var(--text-primary)]"
+                                        ? "text-[var(--color-accent-primary)] translate-x-0.5 -translate-y-0.5"
+                                        : "text-[var(--text-primary)]"
                                     }`}
                             />
                         </Link>
@@ -107,3 +107,5 @@ export function About() {
         </section>
     );
 }
+
+export default About;
